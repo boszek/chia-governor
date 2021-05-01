@@ -1,11 +1,11 @@
-package pl.thatisit.plotter.logprocessor.systemtask;
+package pl.thatisit.plotter.systemtask;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 class WindowsProcessCsvProvider {
 
-    private final String TASKLIST_COMMAND = " wmic process where caption=\"chia.exe\" get commandline,processid /format:csv";
+    private final String TASKLIST_COMMAND = " wmic process where caption=\"chia.exe\" get commandline,processid,creationdate /format:csv";
 
     InputStreamReader getProcessesCsv() {
         try {
