@@ -1,0 +1,4 @@
+chia:
+  executable: C:/Users/boszek/AppData/Local/chia-blockchain/app-1.1.2/resources/app.asar.unpacked/daemon/chia.exe
+  memory: 3400m
+  logs: c:/Users/boszek/.chia/logs
