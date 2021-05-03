@@ -13,9 +13,9 @@ public class Main {
         var chiaConfig = ConfigurationManager.get();
 
         var systemTaskProvider = new WindowsSystemTaskProvider();
-        var processLogParser = new ProcessLogParser(new LogLoader(chiaConfig));
+        ProcessLogParser.init(new LogLoader(chiaConfig));
         var plotProcessRunner = new PlotProcessRunner(chiaConfig);
-        var governor = new Governor(systemTaskProvider, processLogParser, plotProcessRunner);
+        var governor = new Governor(systemTaskProvider, plotProcessRunner);
 
         governor.init();
     }

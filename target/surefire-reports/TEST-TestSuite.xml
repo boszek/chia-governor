@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="11" failures="0" name="TestSuite" time="0.165" errors="0" skipped="0">
+<testsuite tests="11" failures="0" name="TestSuite" time="0.19" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="11.0.5+10"/>
@@ -63,15 +63,15 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="pl.thatisit.plotter.DateUUIDTest" name="shouldDiscardNonDateUUID" time="0.055"/>
-  <testcase classname="pl.thatisit.plotter.DateUUIDTest" name="shouldFormatDateUUID" time="0.028"/>
+  <testcase classname="pl.thatisit.plotter.DateUUIDTest" name="shouldDiscardNonDateUUID" time="0.066"/>
+  <testcase classname="pl.thatisit.plotter.DateUUIDTest" name="shouldFormatDateUUID" time="0.03"/>
   <testcase classname="pl.thatisit.plotter.DateUUIDTest" name="shouldIdentifyDateUUID" time="0"/>
-  <testcase classname="pl.thatisit.plotter.logprocessor.ProcessLogParserTest" name="shouldIdentifyFinished" time="0.032"/>
-  <testcase classname="pl.thatisit.plotter.logprocessor.ProcessLogParserTest" name="shouldIdentifyStage1" time="0.003"/>
+  <testcase classname="pl.thatisit.plotter.logprocessor.ProcessLogParserTest" name="shouldIdentifyFinished" time="0.046"/>
+  <testcase classname="pl.thatisit.plotter.logprocessor.ProcessLogParserTest" name="shouldIdentifyStage1" time="0.001"/>
   <testcase classname="pl.thatisit.plotter.logprocessor.ProcessLogParserTest" name="shouldIdentifyStage2" time="0.008"/>
-  <testcase classname="pl.thatisit.plotter.logprocessor.ProcessLogParserTest" name="shouldIdentifyStage3" time="0.009"/>
-  <testcase classname="pl.thatisit.plotter.logprocessor.ProcessLogParserTest" name="shouldIdentifyStage4" time="0.009"/>
+  <testcase classname="pl.thatisit.plotter.logprocessor.ProcessLogParserTest" name="shouldIdentifyStage3" time="0.007"/>
+  <testcase classname="pl.thatisit.plotter.logprocessor.ProcessLogParserTest" name="shouldIdentifyStage4" time="0.014"/>
   <testcase classname="pl.thatisit.plotter.runner.PlotProcessRunnerTest" name="shouldRunProcess" time="0"/>
-  <testcase classname="pl.thatisit.plotter.systemtask.ArgumentsTest" name="shouldParseArgument" time="0.001"/>
-  <testcase classname="pl.thatisit.plotter.systemtask.WindowsSystemTaskProviderTest" name="shouldListProcesses" time="0.02"/>
+  <testcase classname="pl.thatisit.plotter.systemtask.ArgumentsTest" name="shouldParseArgument" time="0.002"/>
+  <testcase classname="pl.thatisit.plotter.systemtask.WindowsSystemTaskProviderTest" name="shouldListProcesses" time="0.016"/>
 </testsuite>

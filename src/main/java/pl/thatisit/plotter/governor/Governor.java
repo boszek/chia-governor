@@ -3,7 +3,7 @@ package pl.thatisit.plotter.governor;
 import pl.thatisit.plotter.config.ChiaConfig;
 import pl.thatisit.plotter.config.ConfigurationManager;
 import pl.thatisit.plotter.config.Temp;
-import pl.thatisit.plotter.domain.PlotStatus;
+import pl.thatisit.plotter.logprocessor.PlotStatus;
 import pl.thatisit.plotter.domain.PlotterProcess;
 import pl.thatisit.plotter.logprocessor.ProcessLogParser;
 import pl.thatisit.plotter.runner.PlotProcessRunner;
@@ -20,14 +20,12 @@ import static pl.thatisit.plotter.drivespace.Drives.getDrive;
 public class Governor {
 
     private final SystemTaskProvider systemTasks;
-    private final ProcessLogParser processLogParser;
     private final ChiaConfig config = ConfigurationManager.get();
     private final SpaceGovernor spaceGovernor;
     private final PlotProcessRunner plotProcessRunner;
 
-    public Governor(SystemTaskProvider systemTasks, ProcessLogParser processLogParser, PlotProcessRunner plotProcessRunner) {
+    public Governor(SystemTaskProvider systemTasks, PlotProcessRunner plotProcessRunner) {
         this.systemTasks = systemTasks;
-        this.processLogParser = processLogParser;
         this.plotProcessRunner = plotProcessRunner;
         spaceGovernor = new SpaceGovernor(this);
     }
@@ -44,7 +42,6 @@ public class Governor {
 
     public void loop() {
         queryProcesses();
-        parseLogs();
         printProcesses();
         planProcesses();
         sleep(30);
@@ -101,8 +98,8 @@ public class Governor {
 
     private void printProcesses() {
         System.out.printf("Processes: %d, managed: %d, unmanaged %d%n", processes.size(), managedTasks.size(), unmanagedTasks.size());
-        managedTasks.forEach(process -> System.out.printf("Process %s, started %s, status %s, temp %s\n",
-                process.getId(), process.getStarted(), process.getStatus(), process.getTempDrive()));
+        managedTasks.forEach(process -> System.out.printf("Process %s, started %s, temp %s, status %s, progress: %s\n",
+                process.getId(), process.getStarted(),  process.getTempDrive(), process.getStatus(), process.getProgress()));
         config.getTemps()
                 .forEach(temp -> {
                     var disk = spaceGovernor.diskInfo(temp.getLocation());
@@ -117,12 +114,6 @@ public class Governor {
 
     private String toGB(long value) {
         return (value / (1 << 30)) + "GB";
-    }
-
-    private void parseLogs() {
-        managedTasks = managedTasks.stream()
-                .map(processLogParser::init)
-                .collect(Collectors.toList());
     }
 
     private void sleep(int n) {
@@ -143,7 +134,7 @@ public class Governor {
     }
 
     private PlotterProcess processStatus(PlotterProcess source) {
-        return processLogParser.evaluateStatus(source);
+        return ProcessLogParser.evaluateStatus(source);
     }
 
     private Stream<PlotterProcess> managed(List<PlotterProcess> src) {

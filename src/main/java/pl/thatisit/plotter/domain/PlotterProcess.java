@@ -2,8 +2,9 @@ package pl.thatisit.plotter.domain;
 
 import lombok.Builder;
 import lombok.Value;
+import pl.thatisit.plotter.logprocessor.PlotProgress;
+import pl.thatisit.plotter.logprocessor.PlotStatus;
 
-import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 
 @Value
@@ -14,8 +15,8 @@ public class PlotterProcess {
     String tempDrive;
     String targetDrive;
     PlotStatus status;
+    PlotProgress progress;
     K k;
-    InputStreamReader logStream;
     LocalDateTime started;
 
     public boolean isManaged() {

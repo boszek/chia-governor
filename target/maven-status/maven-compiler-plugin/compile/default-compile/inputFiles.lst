@@ -1,4 +1,5 @@
 c:\dev\projects\plotter\src\main\java\pl\thatisit\plotter\logprocessor\PlotterProcessMonitor.java
+c:\dev\projects\plotter\src\main\java\pl\thatisit\plotter\logprocessor\PlotProgress.java
 c:\dev\projects\plotter\src\main\java\pl\thatisit\plotter\runner\PlotProcessRunner.java
 c:\dev\projects\plotter\src\main\java\pl\thatisit\plotter\domain\PlotterProcess.java
 c:\dev\projects\plotter\src\main\java\pl\thatisit\plotter\drivespace\Drives.java
@@ -7,9 +8,10 @@ c:\dev\projects\plotter\src\main\java\pl\thatisit\plotter\systemtask\Arguments.j
 c:\dev\projects\plotter\src\main\java\pl\thatisit\plotter\domain\DateUUID.java
 c:\dev\projects\plotter\src\main\java\pl\thatisit\plotter\systemtask\WindowsSystemTaskProvider.java
 c:\dev\projects\plotter\src\main\java\pl\thatisit\plotter\config\ConfigurationManager.java
+c:\dev\projects\plotter\src\main\java\pl\thatisit\plotter\logprocessor\ProgressTracker.java
+c:\dev\projects\plotter\src\main\java\pl\thatisit\plotter\logprocessor\PlotStatus.java
 c:\dev\projects\plotter\src\main\java\pl\thatisit\plotter\domain\DiskInfo.java
 c:\dev\projects\plotter\src\main\java\pl\thatisit\plotter\Main.java
-c:\dev\projects\plotter\src\main\java\pl\thatisit\plotter\domain\PlotStatus.java
 c:\dev\projects\plotter\src\main\java\pl\thatisit\plotter\logprocessor\ProcessLogParser.java
 c:\dev\projects\plotter\src\main\java\pl\thatisit\plotter\config\ChiaConfig.java
 c:\dev\projects\plotter\src\main\java\pl\thatisit\plotter\config\Configuration.java
