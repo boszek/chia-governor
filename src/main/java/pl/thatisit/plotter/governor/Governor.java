@@ -2,6 +2,7 @@ package pl.thatisit.plotter.governor;
 
 import pl.thatisit.plotter.config.ChiaConfig;
 import pl.thatisit.plotter.config.ConfigurationManager;
+import pl.thatisit.plotter.config.Temp;
 import pl.thatisit.plotter.domain.PlotStatus;
 import pl.thatisit.plotter.domain.PlotterProcess;
 import pl.thatisit.plotter.logprocessor.ProcessLogParser;
@@ -46,13 +47,14 @@ public class Governor {
         parseLogs();
         printProcesses();
         planProcesses();
-        sleep10s();
+        sleep(30);
     }
 
     private void planProcesses() {
         config.getTemps()
                 .stream()
                 .filter(this::canStartPlotter)
+                .map(Temp::getLocation)
                 .forEach(this::startPlotter);
     }
 
@@ -69,12 +71,25 @@ public class Governor {
                 .orElseThrow(() -> new IllegalStateException("No space on target devices!"));
     }
 
-    private boolean canStartPlotter(String temp) {
-        var disk = spaceGovernor.diskInfo(temp);
+    private boolean canStartPlotter(Temp temp) {
+        var disk = spaceGovernor.diskInfo(temp.getLocation());
         if (disk.getUsableFreeSpace() < K_32.getRequiredTempSpace()) {
             return false;
         }
-        return !otherStage1Running(temp);
+        if(otherStage1Running(temp.getLocation())) {
+            return false;
+        }
+        if(runningProcessesOn(temp.getLocation()) >= temp.getLimit()) {
+            return false;
+        }
+        return true;
+    }
+
+    private int runningProcessesOn(String location) {
+        var drive = getDrive(location);
+        return (int) managedTasks.stream()
+                .filter(task -> getDrive(task.getTempDrive()).equals(drive))
+                .count();
     }
 
     private boolean otherStage1Running(String temp) {
@@ -86,11 +101,11 @@ public class Governor {
 
     private void printProcesses() {
         System.out.printf("Processes: %d, managed: %d, unmanaged %d%n", processes.size(), managedTasks.size(), unmanagedTasks.size());
-        managedTasks.forEach(process -> System.out.printf("Process %s, started %s, status %s%n",
-                process.getId(), process.getStarted(), process.getStatus()));
+        managedTasks.forEach(process -> System.out.printf("Process %s, started %s, status %s, temp %s\n",
+                process.getId(), process.getStarted(), process.getStatus(), process.getTempDrive()));
         config.getTemps()
                 .forEach(temp -> {
-                    var disk = spaceGovernor.diskInfo(temp);
+                    var disk = spaceGovernor.diskInfo(temp.getLocation());
                     var msg = String.format("Temp %s: total=%s, allocated=%s, free=%s, usablefree=%s", temp,
                             toGB(disk.getTotalSize()),
                             toGB(disk.getAllocated()),
@@ -110,9 +125,9 @@ public class Governor {
                 .collect(Collectors.toList());
     }
 
-    private void sleep10s() {
+    private void sleep(int n) {
         try {
-            Thread.sleep(10 * 1000);
+            Thread.sleep(n * 1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

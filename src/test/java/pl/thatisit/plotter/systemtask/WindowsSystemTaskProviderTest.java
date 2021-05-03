@@ -17,6 +17,7 @@ public class WindowsSystemTaskProviderTest {
             "\n" +
                     "Node,CommandLine,ProcessId\n" +
                     "BOSZEK-PC,C:\\Users\\boszek\\AppData\\Local\\chia-blockchain\\app-1.1.2\\resources\\app.asar.unpacked\\daemon/chia.exe plots create -k32 -n1 -tG:\\20210501-203341-46ff-8937-420107187303 -2G:\\plot1 \"-dJ:\\Chia Plots\" -b3990 -u128 -r2 -a3337690719,20210501183942.817572+120,9300\n" +
+                    "BOSZEK-PC,C:\\Users\\boszek\\AppData\\Local\\chia-blockchain\\app-1.1.2\\resources\\app.asar.unpacked\\daemon/C:/Users/boszek/AppData/Local/chia-blockchain/app-1.1.2/resources/app.asar.unpacked/daemon/chia.exe  plots create -k32 -n1 -tF:/temp\\20210503-095707-4ebf-9407-df294bb31737 -2F:/temp\\20210503-095707-4ebf-9407-df294bb31737 \"-dJ:/Chia Plots\" -b3800 -u128 -r2 -a3337690719,20210501183942.817572+120,9300\n" +
                     "BOSZEK-PC,\"C:\\Users\\boszek\\AppData\\Local\\chia-blockchain\\app-1.1.2\\Chia.exe\" ,20210501183942.105482+120,20804\n" +
                     "BOSZEK-PC,\"C:\\Users\\boszek\\AppData\\Local\\chia-blockchain\\app-1.1.2\\Chia.exe\" --type=gpu-process --field-trial-handle=1552,9011923592517094884,8285865786163236157,131072 --enable-features=WebComponentsV0Enabled --disable-features=CookiesWithoutSameSiteMustBeSecure,SameSiteByDefaultCookies,SpareRendererForSitePerProcess --gpu-preferences=MAAAAAAAAADgAAAwAAAAAAAAAAAAAAAAAABgAAAAAAAQAAAAAAAAAAAAAAAAAAAAKAAAAAQAAAAgAAAAAAAAACgAAAAAAAAAMAAAAAAAAAA4AAAAAAAAABAAAAAAAAAAAAAAAAUAAAAQAAAAAAAAAAAAAAAGAAAAEAAAAAAAAAABAAAABQAAABAAAAAAAAAAAQAAAAYAAAA= --mojo-platform-channel-handle=1564 /prefetch:2,20210501183942.817572+120,20760\n" +
                     "BOSZEK-PC,\"C:\\Users\\boszek\\AppData\\Local\\chia-blockchain\\app-1.1.2\\Chia.exe\" --type=utility --utility-sub-type=network.mojom.NetworkService --field-trial-handle=1552,9011923592517094884,8285865786163236157,131072 --enable-features=WebComponentsV0Enabled --disable-features=CookiesWithoutSameSiteMustBeSecure,SameSiteByDefaultCookies,SpareRendererForSitePerProcess --lang=pl --service-sandbox-type=network --mojo-platform-channel-handle=1972 /prefetch:8,20210501183942.844704+120,19596\n" +
@@ -54,5 +55,6 @@ public class WindowsSystemTaskProviderTest {
         assertThat(result.get(0).getTargetDrive()).isEqualTo("J:");
         assertThat(result.get(0).getStarted().toString()).isEqualTo("2021-05-01T18:39:42");
         assertThat(result.get(0).getK()).isEqualTo(K_32);
+        assertThat(result.get(1).getTargetDrive()).isEqualTo("J:");
     }
 }

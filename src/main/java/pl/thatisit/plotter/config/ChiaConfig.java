@@ -9,6 +9,6 @@ public class ChiaConfig {
     String executable;
     String memory;
     String logs;
-    List<String> temps;
+    List<Temp> temps;
     List<String> targets;
 }

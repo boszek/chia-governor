@@ -1,12 +1,17 @@
 chia:
-  executable: C:/Users/boszek/AppData/Local/chia-blockchain/app-1.1.2/resources/app.asar.unpacked/daemon/chia.exe
+  executable: C:/Users/boszek/AppData/Local/chia-blockchain
   memory: 3800
   logs: c:/Users/boszek/.chia/logs
   temps:
-#    - "G:/plot1"
-#    - "H:/plot2"
-    - "D:/temp"
-    - "E:/temp"
-    - "F:/temp"
+    - location: "G:/plot1"
+      limit: 4
+    - location: "H:/plot2"
+      limit: 4
+    - location: "D:/temp"
+      limit: 1
+    - location: "E:/temp"
+      limit: 1
+    - location: "F:/temp"
+      limit: 1
   targets:
     - "J:/Chia Plots"

@@ -19,6 +19,7 @@ public class WindowsSystemTaskProvider implements SystemTaskProvider {
     public WindowsSystemTaskProvider() {
         this(new WindowsProcessCsvProvider());
     }
+
     WindowsSystemTaskProvider(WindowsProcessCsvProvider windowsProcessCsvProvider) {
         this.windowsProcessCsvProvider = windowsProcessCsvProvider;
     }
@@ -39,7 +40,7 @@ public class WindowsSystemTaskProvider implements SystemTaskProvider {
 
     private PlotterProcess toProcess(String line) {
         var csvLine = line.split(",");
-        var cmd = csvLine[1];
+        var cmd = Arguments.of(csvLine[1]);
         var date = csvLine[2];
         int pid = Integer.parseInt(csvLine[3]);
         return PlotterProcess.builder()
@@ -52,47 +53,43 @@ public class WindowsSystemTaskProvider implements SystemTaskProvider {
                 .build();
     }
 
-    private K k(String command) {
-        return K.of(property(command, "-k"));
+    private K k(Arguments command) {
+        if(!command.contains("k")) {
+            return null;
+        }
+        return K.of(command.get("k"));
     }
 
     private LocalDateTime toDate(String date) {
         return LocalDateTime.parse(date.split("\\.")[0], DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
     }
 
-    private String id(String command) {
-        if (!command.contains("-t")) {
+    private String id(Arguments command) {
+        if (!command.contains("t")) {
             return null;
         }
-        var tempPath = Path.of(property(command, "-t"));
+        var tempPath = Path.of(command.get("t"));
         return tempPath.getFileName().toString();
     }
 
-    private String tempDrive(String command) {
-        if (!command.contains("-t")) {
+    private String tempDrive(Arguments command) {
+        if (!command.contains("t")) {
             return null;
         }
-        var tempPath = Path.of(property(command, "-t"));
+        var tempPath = Path.of(command.get("t"));
         return getDrive(tempPath);
     }
 
-    private String targetDrive(String command) {
-        if (!command.contains("-d")) {
+    private String targetDrive(Arguments command) {
+        if (!command.contains("d")) {
             return null;
         }
-        var tempPath = Path.of(property(command, "-d"));
+        var tempPath = Path.of(command.get("d"));
         return getDrive(tempPath);
-    }
-
-    private String property(String value, String property) {
-        var tempLocation = value.substring(value.indexOf("chia.exe"));
-        tempLocation = tempLocation.substring(tempLocation.indexOf(property) + 2);
-        tempLocation = tempLocation.substring(0, tempLocation.indexOf(" "));
-        return tempLocation;
     }
 
     private String getDrive(Path path) {
-        return path.getRoot().toString().replaceAll("[\\\\/]","").toUpperCase();
+        return path.getRoot().toString().replaceAll("[\\\\/]", "").toUpperCase();
     }
 
 }
