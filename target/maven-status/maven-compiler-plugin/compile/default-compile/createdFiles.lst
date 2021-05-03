@@ -1,6 +1,2 @@
-pl\thatisit\plotter\logprocessor\PlotterProcess.class
 pl\thatisit\plotter\logprocessor\PlotterProcessMonitor.class
-pl\thatisit\plotter\logprocessor\systemtask\SystemTaskProvider.class
 pl\thatisit\plotter\logprocessor\ProcessLogParser.class
-pl\thatisit\plotter\logprocessor\systemtask\WindowsSystemTaskProvider.class
-pl\thatisit\plotter\logprocessor\systemtask\WindowsProcessCsvProvider.class

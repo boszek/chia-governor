@@ -9,27 +9,20 @@
 <table>
 <tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
 <tr><th colspan="7">Command line suite</th></tr>
-<tr><td><a href="#t0">Command line test</a></td><td class="num">1</td><td class="num">0</td><td class="num attn">1</td><td class="num">150</td><td></td><td></td></tr>
+<tr><td><a href="#t0">Command line test</a></td><td class="num">11</td><td class="num">0</td><td class="num">0</td><td class="num">294</td><td></td><td></td></tr>
 </table>
-<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Command line suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Command line test &#8212; failed</th></tr><tr class="failedeven"><td rowspan="1">pl.thatisit.plotter.logprocessor.systemtask.WindowsSystemTaskProviderTest</td><td><a href="#m0">shouldListProcesses</a></td><td rowspan="1">1619889376552</td><td rowspan="1">22</td></tr><tr><th colspan="4">Command line test &#8212; passed</th></tr><tr class="passedeven"><td rowspan="1">pl.thatisit.plotter.logprocessor.ProcessLogParserTest</td><td><a href="#m1">shouldOpenFile</a></td><td rowspan="1">1619889376440</td><td rowspan="1">4</td></tr></tbody>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Command line suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Command line test &#8212; passed</th></tr><tr class="passedeven"><td rowspan="3">pl.thatisit.plotter.DateUUIDTest</td><td><a href="#m0">shouldDiscardNonDateUUID</a></td><td rowspan="1">1620073967875</td><td rowspan="1">55</td></tr><tr class="passedeven"><td><a href="#m1">shouldFormatDateUUID</a></td><td rowspan="1">1620073967931</td><td rowspan="1">29</td></tr><tr class="passedeven"><td><a href="#m2">shouldIdentifyDateUUID</a></td><td rowspan="1">1620073967960</td><td rowspan="1">0</td></tr><tr class="passedodd"><td rowspan="5">pl.thatisit.plotter.logprocessor.ProcessLogParserTest</td><td><a href="#m3">shouldIdentifyFinished</a></td><td rowspan="1">1620073968067</td><td rowspan="1">32</td></tr><tr class="passedodd"><td><a href="#m4">shouldIdentifyStage1</a></td><td rowspan="1">1620073968099</td><td rowspan="1">3</td></tr><tr class="passedodd"><td><a href="#m5">shouldIdentifyStage2</a></td><td rowspan="1">1620073968102</td><td rowspan="1">9</td></tr><tr class="passedodd"><td><a href="#m6">shouldIdentifyStage3</a></td><td rowspan="1">1620073968111</td><td rowspan="1">9</td></tr><tr class="passedodd"><td><a href="#m7">shouldIdentifyStage4</a></td><td rowspan="1">1620073968120</td><td rowspan="1">9</td></tr><tr class="passedeven"><td rowspan="1">pl.thatisit.plotter.runner.PlotProcessRunnerTest</td><td><a href="#m8">shouldRunProcess</a></td><td rowspan="1">1620073968129</td><td rowspan="1">0</td></tr><tr class="passedodd"><td rowspan="1">pl.thatisit.plotter.systemtask.ArgumentsTest</td><td><a href="#m9">shouldParseArgument</a></td><td rowspan="1">1620073968129</td><td rowspan="1">1</td></tr><tr class="passedeven"><td rowspan="1">pl.thatisit.plotter.systemtask.WindowsSystemTaskProviderTest</td><td><a href="#m10">shouldListProcesses</a></td><td rowspan="1">1620073968135</td><td rowspan="1">20</td></tr></tbody>
 </table>
-<h2>Command line test</h2><h3 id="m0">pl.thatisit.plotter.logprocessor.systemtask.WindowsSystemTaskProviderTest#shouldListProcesses</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NumberFormatException: For input string: &quot;91Â 276&quot;
-	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
-	at java.base/java.lang.Long.parseLong(Long.java:692)
-	at java.base/java.lang.Long.parseLong(Long.java:817)
-	at pl.thatisit.plotter.logprocessor.systemtask.WindowsSystemTaskProvider.parseMemory(WindowsSystemTaskProvider.java:57)
-	at pl.thatisit.plotter.logprocessor.systemtask.WindowsSystemTaskProvider.toProcess(WindowsSystemTaskProvider.java:50)
-	at pl.thatisit.plotter.logprocessor.systemtask.WindowsSystemTaskProvider.lambda$plotterProcesses$0(WindowsSystemTaskProvider.java:31)
-	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
-	at java.base/java.util.LinkedList$LLSpliterator.forEachRemaining(LinkedList.java:1239)
-	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
-	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
-	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
-	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
-	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
-	at pl.thatisit.plotter.logprocessor.systemtask.WindowsSystemTaskProvider.plotterProcesses(WindowsSystemTaskProvider.java:32)
-	at pl.thatisit.plotter.logprocessor.systemtask.WindowsSystemTaskProviderTest.shouldListProcesses(WindowsSystemTaskProviderTest.java:47)
-... Removed 35 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m1">pl.thatisit.plotter.logprocessor.ProcessLogParserTest#shouldOpenFile</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h2>Command line test</h2><h3 id="m0">pl.thatisit.plotter.DateUUIDTest#shouldDiscardNonDateUUID</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m1">pl.thatisit.plotter.DateUUIDTest#shouldFormatDateUUID</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m2">pl.thatisit.plotter.DateUUIDTest#shouldIdentifyDateUUID</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m3">pl.thatisit.plotter.logprocessor.ProcessLogParserTest#shouldIdentifyFinished</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m4">pl.thatisit.plotter.logprocessor.ProcessLogParserTest#shouldIdentifyStage1</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m5">pl.thatisit.plotter.logprocessor.ProcessLogParserTest#shouldIdentifyStage2</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m6">pl.thatisit.plotter.logprocessor.ProcessLogParserTest#shouldIdentifyStage3</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m7">pl.thatisit.plotter.logprocessor.ProcessLogParserTest#shouldIdentifyStage4</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m8">pl.thatisit.plotter.runner.PlotProcessRunnerTest#shouldRunProcess</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m9">pl.thatisit.plotter.systemtask.ArgumentsTest#shouldParseArgument</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m10">pl.thatisit.plotter.systemtask.WindowsSystemTaskProviderTest#shouldListProcesses</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
 </body>
 </html>

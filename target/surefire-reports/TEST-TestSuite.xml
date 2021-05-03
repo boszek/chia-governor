@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="2" failures="1" name="TestSuite" time="0.029" errors="0" skipped="0">
+<testsuite tests="11" failures="0" name="TestSuite" time="0.165" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="11.0.5+10"/>
@@ -43,7 +43,7 @@
     <property name="java.class.path" value="C:\dev\maven-3.3.9\bin\..\boot\plexus-classworlds-2.5.2.jar"/>
     <property name="java.vm.specification.version" value="11"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean package"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher package"/>
     <property name="java.home" value="C:\Program Files\AdoptOpenJDK\jdk-11.0.5.10-hotspot"/>
     <property name="user.language" value="pl"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
@@ -63,24 +63,15 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="pl.thatisit.plotter.logprocessor.ProcessLogParserTest" name="shouldOpenFile" time="0.004"/>
-  <testcase classname="pl.thatisit.plotter.logprocessor.systemtask.WindowsSystemTaskProviderTest" name="shouldListProcesses" time="0.025">
-    <failure message="For input string: &quot;91Â 276&quot;" type="java.lang.NumberFormatException">java.lang.NumberFormatException: For input string: &quot;91Â 276&quot;
-	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
-	at java.base/java.lang.Long.parseLong(Long.java:692)
-	at java.base/java.lang.Long.parseLong(Long.java:817)
-	at pl.thatisit.plotter.logprocessor.systemtask.WindowsSystemTaskProvider.parseMemory(WindowsSystemTaskProvider.java:57)
-	at pl.thatisit.plotter.logprocessor.systemtask.WindowsSystemTaskProvider.toProcess(WindowsSystemTaskProvider.java:50)
-	at pl.thatisit.plotter.logprocessor.systemtask.WindowsSystemTaskProvider.lambda$plotterProcesses$0(WindowsSystemTaskProvider.java:31)
-	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
-	at java.base/java.util.LinkedList$LLSpliterator.forEachRemaining(LinkedList.java:1239)
-	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
-	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
-	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
-	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
-	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
-	at pl.thatisit.plotter.logprocessor.systemtask.WindowsSystemTaskProvider.plotterProcesses(WindowsSystemTaskProvider.java:32)
-	at pl.thatisit.plotter.logprocessor.systemtask.WindowsSystemTaskProviderTest.shouldListProcesses(WindowsSystemTaskProviderTest.java:47)
-</failure>
-  </testcase>
+  <testcase classname="pl.thatisit.plotter.DateUUIDTest" name="shouldDiscardNonDateUUID" time="0.055"/>
+  <testcase classname="pl.thatisit.plotter.DateUUIDTest" name="shouldFormatDateUUID" time="0.028"/>
+  <testcase classname="pl.thatisit.plotter.DateUUIDTest" name="shouldIdentifyDateUUID" time="0"/>
+  <testcase classname="pl.thatisit.plotter.logprocessor.ProcessLogParserTest" name="shouldIdentifyFinished" time="0.032"/>
+  <testcase classname="pl.thatisit.plotter.logprocessor.ProcessLogParserTest" name="shouldIdentifyStage1" time="0.003"/>
+  <testcase classname="pl.thatisit.plotter.logprocessor.ProcessLogParserTest" name="shouldIdentifyStage2" time="0.008"/>
+  <testcase classname="pl.thatisit.plotter.logprocessor.ProcessLogParserTest" name="shouldIdentifyStage3" time="0.009"/>
+  <testcase classname="pl.thatisit.plotter.logprocessor.ProcessLogParserTest" name="shouldIdentifyStage4" time="0.009"/>
+  <testcase classname="pl.thatisit.plotter.runner.PlotProcessRunnerTest" name="shouldRunProcess" time="0"/>
+  <testcase classname="pl.thatisit.plotter.systemtask.ArgumentsTest" name="shouldParseArgument" time="0.001"/>
+  <testcase classname="pl.thatisit.plotter.systemtask.WindowsSystemTaskProviderTest" name="shouldListProcesses" time="0.02"/>
 </testsuite>
