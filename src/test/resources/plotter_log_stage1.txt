@@ -1,0 +1,42 @@
+2021-04-29T23:19:12.545  chia.plotting.create_plots       : [32mINFO    [0m Creating 1 plots of size 32, pool public key:  b30a5f1faf257b0d85d158d4b6f0192172d3840fbe63360f9107e8ae4b7104a9e61bc7f87d56c46431385de0038cd8f2 farmer public key: 999b45228473cef8182d22f853767247516ed500cf0ab424823c5b0296dc37c3c74d022978e4f8ea8c5f89ec73ac6564[0m
+2021-04-29T23:19:12.552  chia.plotting.create_plots       : [32mINFO    [0m Memo: b30a5f1faf257b0d85d158d4b6f0192172d3840fbe63360f9107e8ae4b7104a9e61bc7f87d56c46431385de0038cd8f2999b45228473cef8182d22f853767247516ed500cf0ab424823c5b0296dc37c3c74d022978e4f8ea8c5f89ec73ac656429a3cb90316be8d82e1db8867e9e434fdfed79a18ed1fa1654b27b6d7b93d2a0[0m
+2021-04-29T23:19:12.553  chia.plotting.create_plots       : [32mINFO    [0m Starting plot 1/1[0m
+
+Starting plotting progress into temporary dirs: H:\plot2 and H:\plot2
+ID: 8c3df4c8a488a265d0be5e4df7b037a5321043123a74e539fdbf0df0c0f32804
+Plot size is: 32
+Buffer size is: 3390MiB
+Using 128 buckets
+Using 2 threads of stripe size 65536
+
+Starting phase 1/4: Forward Propagation into tmp files... Thu Apr 29 23:19:12 2021
+Computing table 1
+F1 complete, time: 488.462 seconds. CPU (32.89%) Thu Apr 29 23:27:21 2021
+Computing table 2
+	Bucket 0 uniform sort. Ram: 3.251GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 1 uniform sort. Ram: 3.251GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 2 uniform sort. Ram: 3.251GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 3 uniform sort. Ram: 3.251GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 4 uniform sort. Ram: 3.251GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 5 uniform sort. Ram: 3.251GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 6 uniform sort. Ram: 3.251GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 7 uniform sort. Ram: 3.251GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 8 uniform sort. Ram: 3.251GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 9 uniform sort. Ram: 3.251GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 10 uniform sort. Ram: 3.251GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 11 uniform sort. Ram: 3.251GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 12 uniform sort. Ram: 3.251GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 13 uniform sort. Ram: 3.251GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 14 uniform sort. Ram: 3.251GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 15 uniform sort. Ram: 3.251GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 16 uniform sort. Ram: 3.251GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 17 uniform sort. Ram: 3.251GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 18 uniform sort. Ram: 3.251GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 19 uniform sort. Ram: 3.251GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 20 uniform sort. Ram: 3.251GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 21 uniform sort. Ram: 3.251GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.
+	Bucket 22 uniform sort. Ram: 3.251GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 23 uniform sort. Ram: 3.251GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 24 uniform sort. Ram: 3.251GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 25 uniform sort. Ram: 3.251GiB, u_sort min: 0.563GiB, qs min: 0.281GiB.
+	Bucket 26 uniform sort. Ram: 3.251GiB, u_sort min: 1.125GiB, qs min: 0.281GiB.

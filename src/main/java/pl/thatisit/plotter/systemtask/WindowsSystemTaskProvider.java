@@ -2,7 +2,8 @@ package pl.thatisit.plotter.systemtask;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import pl.thatisit.plotter.PlotterProcess;
+import pl.thatisit.plotter.domain.K;
+import pl.thatisit.plotter.domain.PlotterProcess;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -47,7 +48,12 @@ public class WindowsSystemTaskProvider implements SystemTaskProvider {
                 .tempDrive(tempDrive(cmd))
                 .targetDrive(targetDrive(cmd))
                 .started(toDate(date))
+                .k(k(cmd))
                 .build();
+    }
+
+    private K k(String command) {
+        return K.of(property(command, "-k"));
     }
 
     private LocalDateTime toDate(String date) {

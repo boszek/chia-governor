@@ -1,9 +1,9 @@
 package pl.thatisit.plotter;
 
 import org.testng.annotations.Test;
+import pl.thatisit.plotter.domain.DateUUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.testng.Assert.*;
 
 public class DateUUIDTest {
 

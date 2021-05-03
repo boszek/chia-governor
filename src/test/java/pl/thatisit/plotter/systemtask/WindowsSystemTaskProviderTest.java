@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.MockitoAnnotations.initMocks;
+import static pl.thatisit.plotter.domain.K.K_32;
 
 public class WindowsSystemTaskProviderTest {
     private static String data =
@@ -52,5 +53,6 @@ public class WindowsSystemTaskProviderTest {
         assertThat(result.get(0).getTempDrive()).isEqualTo("G:");
         assertThat(result.get(0).getTargetDrive()).isEqualTo("J:");
         assertThat(result.get(0).getStarted().toString()).isEqualTo("2021-05-01T18:39:42");
+        assertThat(result.get(0).getK()).isEqualTo(K_32);
     }
 }

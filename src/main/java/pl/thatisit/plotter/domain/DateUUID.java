@@ -1,4 +1,4 @@
-package pl.thatisit.plotter;
+package pl.thatisit.plotter.domain;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

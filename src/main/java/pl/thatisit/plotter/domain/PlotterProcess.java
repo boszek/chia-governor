@@ -1,4 +1,4 @@
-package pl.thatisit.plotter;
+package pl.thatisit.plotter.domain;
 
 import lombok.Builder;
 import lombok.Value;
@@ -14,6 +14,7 @@ public class PlotterProcess {
     String tempDrive;
     String targetDrive;
     PlotStatus status;
+    K k;
     InputStreamReader logStream;
     LocalDateTime started;
 

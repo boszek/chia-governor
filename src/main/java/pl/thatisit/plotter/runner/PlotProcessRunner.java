@@ -1,8 +1,8 @@
 package pl.thatisit.plotter.runner;
 
-import pl.thatisit.plotter.DateUUID;
+import pl.thatisit.plotter.domain.DateUUID;
 import pl.thatisit.plotter.config.ChiaConfig;
-import pl.thatisit.plotter.PlotterProcess;
+import pl.thatisit.plotter.domain.PlotterProcess;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -27,6 +27,7 @@ public class PlotProcessRunner {
 
             String cmd = String.format(config.getExecutable() +
                     " plots create -k32 -n1 -t%s -2%s \"-d%s\" -b%s -u128", temp, temp, target, config.getMemory());
+            System.out.println("Starting process with the command: " + cmd);
             cmd = String.format("start /B %s > %s", cmd, logLocation);
             new ProcessBuilder()
                     .command("cmd.exe", "/c", cmd)

@@ -3,9 +3,10 @@ chia:
   memory: 3800
   logs: c:/Users/boszek/.chia/logs
   temps:
-    - "G:/chiatemp"
-    - "H:/chiatemp"
-    - "D:/chiatemp"
-    - "E:/chiatemp"
+#    - "G:/plot1"
+#    - "H:/plot2"
+    - "D:/temp"
+    - "E:/temp"
+    - "F:/temp"
   targets:
     - "J:/Chia Plots"
