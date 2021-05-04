@@ -22,7 +22,7 @@ chia:
 ```
 ## Build
 Use maven for building executable jar
-`maven package`
+`mvn package`
 
 ## Run
 `java -jar governor-0.1.jar`
