@@ -1,7 +1,12 @@
 # Chia Governor
 Simple java application to govern a chia cryptocurrency mining.
 
-Currently, only supported on Windows.
+Working on both linux (tested Ubuntu) and Windows.
+
+The idea is to control running processes so that:
+- No process will go beyond drive free space
+- Can set limit per drive
+- Only one Chia Phase 1 can be running simultanously on one drive
 
 ## Configure
 Example:
