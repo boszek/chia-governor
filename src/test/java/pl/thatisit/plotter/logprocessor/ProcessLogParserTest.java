@@ -32,6 +32,7 @@ public class ProcessLogParserTest {
         assertThat(result.getStatus()).isEqualTo(STAGE1);
         assertThat(result.getProgress().toString()).isEqualTo("Stage1  Table: 2 bucket: 26; ");
     }
+
     @Test
     public void shouldIdentifyStage2() {
         givenLog("plotter_log_stage2.txt");
@@ -39,6 +40,7 @@ public class ProcessLogParserTest {
         assertThat(result.getStatus()).isEqualTo(STAGE2);
         assertThat(result.getProgress().toString()).isEqualTo("Stage1 Complete in 5h20m35s; Stage2  Table: 3; ");
     }
+
     @Test
     public void shouldIdentifyStage3() {
         givenLog("plotter_log_stage3.txt");
@@ -46,6 +48,7 @@ public class ProcessLogParserTest {
         assertThat(result.getStatus()).isEqualTo(STAGE3);
         assertThat(result.getProgress().toString()).isEqualTo("Stage1 Complete in 5h20m35s; Stage2 Complete in 1h14m16s; Stage3  Table: 2 bucket: 16; ");
     }
+
     @Test
     public void shouldIdentifyStage4() {
         givenLog("plotter_log_stage4.txt");
@@ -53,6 +56,7 @@ public class ProcessLogParserTest {
         assertThat(result.getStatus()).isEqualTo(STAGE4);
         assertThat(result.getProgress().toString()).isEqualTo("Stage1 Complete in 5h20m35s; Stage2 Complete in 1h14m16s; Stage3 Complete in 2h19m11s; Stage4  bucket: 71; ");
     }
+
     @Test
     public void shouldIdentifyFinished() {
         givenLog("plotter_log_complete.txt");

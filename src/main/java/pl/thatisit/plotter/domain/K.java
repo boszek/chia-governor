@@ -13,7 +13,8 @@ public enum K {
 
     public static K of(String value) {
         switch (value) {
-            case "32": return K_32;
+            case "32":
+                return K_32;
         }
         throw new IllegalArgumentException("no K configured for k=" + value);
     }

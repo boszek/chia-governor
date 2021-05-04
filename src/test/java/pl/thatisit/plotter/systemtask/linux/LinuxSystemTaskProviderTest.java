@@ -2,9 +2,7 @@ package pl.thatisit.plotter.systemtask.linux;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pl.thatisit.plotter.drivespace.Drives;
-import pl.thatisit.plotter.systemtask.linux.LinuxProcessCsvProvider;
-import pl.thatisit.plotter.systemtask.linux.LinuxSystemTaskProvider;
+import pl.thatisit.plotter.drivespace.LinuxDrives;
 
 import java.util.List;
 
@@ -24,7 +22,7 @@ public class LinuxSystemTaskProviderTest {
     @BeforeMethod
     public void init() {
         var csvProvider = mock(LinuxProcessCsvProvider.class);
-        var drives = mock(Drives.class);
+        var drives = mock(LinuxDrives.class);
         given(csvProvider.getProcessesCsv()).willReturn(List.of(output.split("\n")));
         given(drives.getDrive(eq("/media/boszek/Chia Toshiba 4TB/temp"))).willReturn("/dev/sda");
         given(drives.getDrive(eq("/media/boszek/Chia Toshiba 4TB/Chia Plots"))).willReturn("/dev/sda");

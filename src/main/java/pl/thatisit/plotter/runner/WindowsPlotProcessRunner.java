@@ -9,19 +9,19 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class WindowsPlotProcessRunner implements PlotProcessRunner{
+public class WindowsPlotProcessRunner implements PlotProcessRunner {
 
     private final String executable;
     private final String logsLocation;
     private final String memory;
 
-    public WindowsPlotProcessRunner(ChiaConfig chiaConfig) {
+    public WindowsPlotProcessRunner(ChiaConfig chiaConfig, Drives drives) {
         logsLocation = chiaConfig.getLogs();
         memory = chiaConfig.getMemory();
-        if(chiaConfig.getExecutable().endsWith("chia.exe")) {
+        if (chiaConfig.getExecutable().endsWith("chia.exe")) {
             executable = chiaConfig.getExecutable();
         } else {
-            executable = Drives.getInstance().findFile(chiaConfig.getExecutable(), "chia.exe").getAbsolutePath();
+            executable = drives.findFile(chiaConfig.getExecutable(), "chia.exe").getAbsolutePath();
         }
     }
 

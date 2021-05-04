@@ -5,9 +5,8 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.testng.Assert.*;
 
-public class DrivesTest {
+public class LinuxDrivesTest {
     final String mounts = "/dev/loop4 /snap/snap-store/518 squashfs ro,nodev,relatime 0 0\n" +
             "/dev/sda /media/boszek/Chia\\040Toshiba\\0404TB ext4 rw,nosuid,nodev,relatime 0 0" +
             "/dev/loop5 /snap/gtk-common-themes/1515 squashfs ro,nodev,relatime 0 0\n" +
@@ -24,7 +23,7 @@ public class DrivesTest {
 
     @Test
     public void shouldParseMountsOutput() {
-        var result = Drives.mountRoots(List.of(mounts.split("\n")));
+        var result = LinuxDrives.mountRoots(List.of(mounts.split("\n")));
 
         assertThat(result.get(1)).isEqualTo("/media/boszek/Chia Toshiba 4TB");
     }

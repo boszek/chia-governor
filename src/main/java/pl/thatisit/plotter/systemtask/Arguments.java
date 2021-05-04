@@ -9,29 +9,29 @@ public class Arguments {
     private Arguments(String value) {
         char[] characters = value.toCharArray();
 
-        for(int i=0;i<characters.length;) {
+        for (int i = 0; i < characters.length; ) {
             char next = characters[i];
-            if(next == '\"') {
+            if (next == '\"') {
                 i++;
                 var sb = new StringBuilder();
-                while(characters[i] != '\"') {
+                while (characters[i] != '\"') {
                     sb.append(characters[i]);
                     i++;
                 }
                 parseToken(sb.toString(), tokens);
                 i++;
-            } else if (Character.isWhitespace(next)){
+            } else if (Character.isWhitespace(next)) {
                 i++;
-            } else if(Character.isAlphabetic(next)) {
+            } else if (Character.isAlphabetic(next)) {
                 var sb = new StringBuilder();
-                while (Character.isAlphabetic(characters[i]) || Character.isDigit(characters[i]) || characters[i] == '/' || characters[i]=='-') {
+                while (Character.isAlphabetic(characters[i]) || Character.isDigit(characters[i]) || characters[i] == '/' || characters[i] == '-') {
                     sb.append(characters[i]);
                     i++;
                 }
                 parseToken(sb.toString(), tokens);
-            } else if(characters[i] == '-' && characters[i-1] == ' '){
+            } else if (characters[i] == '-' && characters[i - 1] == ' ') {
                 var sb = new StringBuilder();
-                while(i < characters.length && !((characters[i] == ' ' || characters[i] == '\"') && characters[i+1] == '-')) {
+                while (i < characters.length && !((characters[i] == ' ' || characters[i] == '\"') && i < characters.length - 1 && characters[i + 1] == '-')) {
                     sb.append(characters[i]);
                     i++;
                 }
@@ -43,8 +43,8 @@ public class Arguments {
     }
 
     private void parseToken(String value, Map<String, String> tokens) {
-        if(value.startsWith("-")) {
-            tokens.put(value.substring(1,2), value.substring(2, value.length()));
+        if (value.startsWith("-")) {
+            tokens.put(value.substring(1, 2), value.substring(2));
         } else {
             tokens.put(value, value);
         }

@@ -3,7 +3,7 @@ package pl.thatisit.plotter.systemtask.linux;
 import org.apache.commons.lang3.StringUtils;
 import pl.thatisit.plotter.domain.K;
 import pl.thatisit.plotter.domain.PlotterProcess;
-import pl.thatisit.plotter.drivespace.Drives;
+import pl.thatisit.plotter.drivespace.LinuxDrives;
 import pl.thatisit.plotter.systemtask.Arguments;
 import pl.thatisit.plotter.systemtask.SystemTaskProvider;
 
@@ -17,12 +17,9 @@ import java.util.stream.Collectors;
 public class LinuxSystemTaskProvider implements SystemTaskProvider {
     private static Pattern datePattern = Pattern.compile("(\\d{8}-\\d{6})");
     private final LinuxProcessCsvProvider linuxProcessCsvProvider;
-    private final Drives drives;
-    public LinuxSystemTaskProvider() {
-        this(new LinuxProcessCsvProvider(), Drives.getInstance());
-    }
+    private final LinuxDrives drives;
 
-    LinuxSystemTaskProvider(LinuxProcessCsvProvider linuxProcessCsvProvider, Drives drives) {
+    public LinuxSystemTaskProvider(LinuxProcessCsvProvider linuxProcessCsvProvider, LinuxDrives drives) {
         this.linuxProcessCsvProvider = linuxProcessCsvProvider;
         this.drives = drives;
     }

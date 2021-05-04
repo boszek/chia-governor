@@ -6,7 +6,6 @@ import pl.thatisit.plotter.domain.K;
 import pl.thatisit.plotter.domain.PlotterProcess;
 import pl.thatisit.plotter.systemtask.Arguments;
 import pl.thatisit.plotter.systemtask.SystemTaskProvider;
-import pl.thatisit.plotter.systemtask.windows.WindowsProcessCsvProvider;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -57,7 +56,7 @@ public class WindowsSystemTaskProvider implements SystemTaskProvider {
     }
 
     private K k(Arguments command) {
-        if(!command.contains("k")) {
+        if (!command.contains("k")) {
             return null;
         }
         return K.of(command.get("k"));
