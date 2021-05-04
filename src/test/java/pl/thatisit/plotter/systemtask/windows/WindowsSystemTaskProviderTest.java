@@ -1,4 +1,4 @@
-package pl.thatisit.plotter.systemtask;
+package pl.thatisit.plotter.systemtask.windows;
 
 import org.mockito.Mock;
 import org.testng.annotations.BeforeMethod;

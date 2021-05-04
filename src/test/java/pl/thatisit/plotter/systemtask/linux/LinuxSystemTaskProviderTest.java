@@ -1,8 +1,10 @@
-package pl.thatisit.plotter.systemtask;
+package pl.thatisit.plotter.systemtask.linux;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pl.thatisit.plotter.drivespace.Drives;
+import pl.thatisit.plotter.systemtask.linux.LinuxProcessCsvProvider;
+import pl.thatisit.plotter.systemtask.linux.LinuxSystemTaskProvider;
 
 import java.util.List;
 

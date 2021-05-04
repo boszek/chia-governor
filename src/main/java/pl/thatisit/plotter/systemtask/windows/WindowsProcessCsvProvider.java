@@ -1,4 +1,4 @@
-package pl.thatisit.plotter.systemtask;
+package pl.thatisit.plotter.systemtask.windows;
 
 import java.io.IOException;
 import java.io.InputStreamReader;

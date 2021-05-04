@@ -1,89 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="11" passed="11" failed="0" skipped="0">
+<testng-results ignored="0" total="14" passed="14" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2021-05-03T21:46:55Z" name="Command line suite" finished-at="2021-05-03T21:46:55Z" duration-ms="338">
+  <suite started-at="2021-05-04T17:29:12Z" name="Command line suite" finished-at="2021-05-04T17:29:13Z" duration-ms="371">
     <groups>
     </groups>
-    <test started-at="2021-05-03T21:46:55Z" name="Command line test" finished-at="2021-05-03T21:46:55Z" duration-ms="338">
+    <test started-at="2021-05-04T17:29:12Z" name="Command line test" finished-at="2021-05-04T17:29:13Z" duration-ms="371">
       <class name="pl.thatisit.plotter.logprocessor.ProcessLogParserTest">
-        <test-method is-config="true" signature="init()[pri:0, instance:pl.thatisit.plotter.logprocessor.ProcessLogParserTest@bef2d72]" started-at="2021-05-03T21:46:55Z" name="init" finished-at="2021-05-03T21:46:55Z" duration-ms="119" status="PASS">
+        <test-method is-config="true" signature="init()[pri:0, instance:pl.thatisit.plotter.logprocessor.ProcessLogParserTest@76908cc0]" started-at="2021-05-04T17:29:12Z" name="init" finished-at="2021-05-04T17:29:13Z" duration-ms="111" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- init -->
-        <test-method signature="shouldIdentifyFinished()[pri:0, instance:pl.thatisit.plotter.logprocessor.ProcessLogParserTest@bef2d72]" started-at="2021-05-03T21:46:55Z" name="shouldIdentifyFinished" finished-at="2021-05-03T21:46:55Z" duration-ms="46" status="PASS">
+        <test-method signature="shouldIdentifyFinished()[pri:0, instance:pl.thatisit.plotter.logprocessor.ProcessLogParserTest@76908cc0]" started-at="2021-05-04T17:29:13Z" name="shouldIdentifyFinished" finished-at="2021-05-04T17:29:13Z" duration-ms="53" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldIdentifyFinished -->
-        <test-method signature="shouldIdentifyStage1()[pri:0, instance:pl.thatisit.plotter.logprocessor.ProcessLogParserTest@bef2d72]" started-at="2021-05-03T21:46:55Z" name="shouldIdentifyStage1" finished-at="2021-05-03T21:46:55Z" duration-ms="2" status="PASS">
+        <test-method is-config="true" signature="init()[pri:0, instance:pl.thatisit.plotter.logprocessor.ProcessLogParserTest@76908cc0]" started-at="2021-05-04T17:29:13Z" name="init" finished-at="2021-05-04T17:29:13Z" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- init -->
+        <test-method signature="shouldIdentifyStage1()[pri:0, instance:pl.thatisit.plotter.logprocessor.ProcessLogParserTest@76908cc0]" started-at="2021-05-04T17:29:13Z" name="shouldIdentifyStage1" finished-at="2021-05-04T17:29:13Z" duration-ms="2" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldIdentifyStage1 -->
-        <test-method is-config="true" signature="init()[pri:0, instance:pl.thatisit.plotter.logprocessor.ProcessLogParserTest@bef2d72]" started-at="2021-05-03T21:46:55Z" name="init" finished-at="2021-05-03T21:46:55Z" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="init()[pri:0, instance:pl.thatisit.plotter.logprocessor.ProcessLogParserTest@76908cc0]" started-at="2021-05-04T17:29:13Z" name="init" finished-at="2021-05-04T17:29:13Z" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- init -->
-        <test-method is-config="true" signature="init()[pri:0, instance:pl.thatisit.plotter.logprocessor.ProcessLogParserTest@bef2d72]" started-at="2021-05-03T21:46:55Z" name="init" finished-at="2021-05-03T21:46:55Z" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- init -->
-        <test-method signature="shouldIdentifyStage2()[pri:0, instance:pl.thatisit.plotter.logprocessor.ProcessLogParserTest@bef2d72]" started-at="2021-05-03T21:46:55Z" name="shouldIdentifyStage2" finished-at="2021-05-03T21:46:55Z" duration-ms="8" status="PASS">
+        <test-method signature="shouldIdentifyStage2()[pri:0, instance:pl.thatisit.plotter.logprocessor.ProcessLogParserTest@76908cc0]" started-at="2021-05-04T17:29:13Z" name="shouldIdentifyStage2" finished-at="2021-05-04T17:29:13Z" duration-ms="12" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldIdentifyStage2 -->
-        <test-method is-config="true" signature="init()[pri:0, instance:pl.thatisit.plotter.logprocessor.ProcessLogParserTest@bef2d72]" started-at="2021-05-03T21:46:55Z" name="init" finished-at="2021-05-03T21:46:55Z" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- init -->
-        <test-method signature="shouldIdentifyStage3()[pri:0, instance:pl.thatisit.plotter.logprocessor.ProcessLogParserTest@bef2d72]" started-at="2021-05-03T21:46:55Z" name="shouldIdentifyStage3" finished-at="2021-05-03T21:46:55Z" duration-ms="7" status="PASS">
+        <test-method signature="shouldIdentifyStage3()[pri:0, instance:pl.thatisit.plotter.logprocessor.ProcessLogParserTest@76908cc0]" started-at="2021-05-04T17:29:13Z" name="shouldIdentifyStage3" finished-at="2021-05-04T17:29:13Z" duration-ms="12" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldIdentifyStage3 -->
-        <test-method is-config="true" signature="init()[pri:0, instance:pl.thatisit.plotter.logprocessor.ProcessLogParserTest@bef2d72]" started-at="2021-05-03T21:46:55Z" name="init" finished-at="2021-05-03T21:46:55Z" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="init()[pri:0, instance:pl.thatisit.plotter.logprocessor.ProcessLogParserTest@76908cc0]" started-at="2021-05-04T17:29:13Z" name="init" finished-at="2021-05-04T17:29:13Z" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- init -->
-        <test-method signature="shouldIdentifyStage4()[pri:0, instance:pl.thatisit.plotter.logprocessor.ProcessLogParserTest@bef2d72]" started-at="2021-05-03T21:46:55Z" name="shouldIdentifyStage4" finished-at="2021-05-03T21:46:55Z" duration-ms="13" status="PASS">
+        <test-method is-config="true" signature="init()[pri:0, instance:pl.thatisit.plotter.logprocessor.ProcessLogParserTest@76908cc0]" started-at="2021-05-04T17:29:13Z" name="init" finished-at="2021-05-04T17:29:13Z" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- init -->
+        <test-method signature="shouldIdentifyStage4()[pri:0, instance:pl.thatisit.plotter.logprocessor.ProcessLogParserTest@76908cc0]" started-at="2021-05-04T17:29:13Z" name="shouldIdentifyStage4" finished-at="2021-05-04T17:29:13Z" duration-ms="14" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldIdentifyStage4 -->
       </class> <!-- pl.thatisit.plotter.logprocessor.ProcessLogParserTest -->
-      <class name="pl.thatisit.plotter.systemtask.ArgumentsTest">
-        <test-method signature="shouldParseArgument()[pri:0, instance:pl.thatisit.plotter.systemtask.ArgumentsTest@22a637e7]" started-at="2021-05-03T21:46:55Z" name="shouldParseArgument" finished-at="2021-05-03T21:46:55Z" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- shouldParseArgument -->
-      </class> <!-- pl.thatisit.plotter.systemtask.ArgumentsTest -->
-      <class name="pl.thatisit.plotter.runner.PlotProcessRunnerTest">
-        <test-method signature="shouldRunProcess()[pri:0, instance:pl.thatisit.plotter.runner.PlotProcessRunnerTest@69b2283a]" started-at="2021-05-03T21:46:55Z" name="shouldRunProcess" finished-at="2021-05-03T21:46:55Z" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- shouldRunProcess -->
-      </class> <!-- pl.thatisit.plotter.runner.PlotProcessRunnerTest -->
-      <class name="pl.thatisit.plotter.systemtask.WindowsSystemTaskProviderTest">
-        <test-method is-config="true" signature="init()[pri:0, instance:pl.thatisit.plotter.systemtask.WindowsSystemTaskProviderTest@6fe7aac8]" started-at="2021-05-03T21:46:55Z" name="init" finished-at="2021-05-03T21:46:55Z" duration-ms="5" status="PASS">
+      <class name="pl.thatisit.plotter.systemtask.linux.LinuxSystemTaskProviderTest">
+        <test-method is-config="true" signature="init()[pri:0, instance:pl.thatisit.plotter.systemtask.linux.LinuxSystemTaskProviderTest@49b0b76]" started-at="2021-05-04T17:29:13Z" name="init" finished-at="2021-05-04T17:29:13Z" duration-ms="16" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- init -->
-        <test-method signature="shouldListProcesses()[pri:0, instance:pl.thatisit.plotter.systemtask.WindowsSystemTaskProviderTest@6fe7aac8]" started-at="2021-05-03T21:46:55Z" name="shouldListProcesses" finished-at="2021-05-03T21:46:55Z" duration-ms="16" status="PASS">
+        <test-method signature="shouldParseProcesses()[pri:0, instance:pl.thatisit.plotter.systemtask.linux.LinuxSystemTaskProviderTest@49b0b76]" started-at="2021-05-04T17:29:13Z" name="shouldParseProcesses" finished-at="2021-05-04T17:29:13Z" duration-ms="10" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- shouldParseProcesses -->
+      </class> <!-- pl.thatisit.plotter.systemtask.linux.LinuxSystemTaskProviderTest -->
+      <class name="pl.thatisit.plotter.systemtask.ArgumentsTest">
+        <test-method signature="shouldParseLinuxArgument()[pri:0, instance:pl.thatisit.plotter.systemtask.ArgumentsTest@35047d03]" started-at="2021-05-04T17:29:13Z" name="shouldParseLinuxArgument" finished-at="2021-05-04T17:29:13Z" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- shouldParseLinuxArgument -->
+        <test-method signature="shouldParseWindowsArgument()[pri:0, instance:pl.thatisit.plotter.systemtask.ArgumentsTest@35047d03]" started-at="2021-05-04T17:29:13Z" name="shouldParseWindowsArgument" finished-at="2021-05-04T17:29:13Z" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- shouldParseWindowsArgument -->
+      </class> <!-- pl.thatisit.plotter.systemtask.ArgumentsTest -->
+      <class name="pl.thatisit.plotter.runner.WindowsPlotProcessRunnerTest">
+        <test-method signature="shouldRunProcess()[pri:0, instance:pl.thatisit.plotter.runner.WindowsPlotProcessRunnerTest@2473d930]" started-at="2021-05-04T17:29:13Z" name="shouldRunProcess" finished-at="2021-05-04T17:29:13Z" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- shouldRunProcess -->
+      </class> <!-- pl.thatisit.plotter.runner.WindowsPlotProcessRunnerTest -->
+      <class name="pl.thatisit.plotter.systemtask.windows.WindowsSystemTaskProviderTest">
+        <test-method is-config="true" signature="init()[pri:0, instance:pl.thatisit.plotter.systemtask.windows.WindowsSystemTaskProviderTest@769f71a9]" started-at="2021-05-04T17:29:13Z" name="init" finished-at="2021-05-04T17:29:13Z" duration-ms="4" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- init -->
+        <test-method signature="shouldListProcesses()[pri:0, instance:pl.thatisit.plotter.systemtask.windows.WindowsSystemTaskProviderTest@769f71a9]" started-at="2021-05-04T17:29:13Z" name="shouldListProcesses" finished-at="2021-05-04T17:29:13Z" duration-ms="10" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldListProcesses -->
-      </class> <!-- pl.thatisit.plotter.systemtask.WindowsSystemTaskProviderTest -->
+      </class> <!-- pl.thatisit.plotter.systemtask.windows.WindowsSystemTaskProviderTest -->
       <class name="pl.thatisit.plotter.DateUUIDTest">
-        <test-method signature="shouldDiscardNonDateUUID()[pri:0, instance:pl.thatisit.plotter.DateUUIDTest@5223e5ee]" started-at="2021-05-03T21:46:55Z" name="shouldDiscardNonDateUUID" finished-at="2021-05-03T21:46:55Z" duration-ms="65" status="PASS">
+        <test-method signature="shouldDiscardNonDateUUID()[pri:0, instance:pl.thatisit.plotter.DateUUIDTest@1d119efb]" started-at="2021-05-04T17:29:12Z" name="shouldDiscardNonDateUUID" finished-at="2021-05-04T17:29:12Z" duration-ms="61" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldDiscardNonDateUUID -->
-        <test-method signature="shouldFormatDateUUID()[pri:0, instance:pl.thatisit.plotter.DateUUIDTest@5223e5ee]" started-at="2021-05-03T21:46:55Z" name="shouldFormatDateUUID" finished-at="2021-05-03T21:46:55Z" duration-ms="30" status="PASS">
+        <test-method signature="shouldFormatDateUUID()[pri:0, instance:pl.thatisit.plotter.DateUUIDTest@1d119efb]" started-at="2021-05-04T17:29:12Z" name="shouldFormatDateUUID" finished-at="2021-05-04T17:29:12Z" duration-ms="32" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldFormatDateUUID -->
-        <test-method signature="shouldIdentifyDateUUID()[pri:0, instance:pl.thatisit.plotter.DateUUIDTest@5223e5ee]" started-at="2021-05-03T21:46:55Z" name="shouldIdentifyDateUUID" finished-at="2021-05-03T21:46:55Z" duration-ms="0" status="PASS">
+        <test-method signature="shouldIdentifyDateUUID()[pri:0, instance:pl.thatisit.plotter.DateUUIDTest@1d119efb]" started-at="2021-05-04T17:29:12Z" name="shouldIdentifyDateUUID" finished-at="2021-05-04T17:29:12Z" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldIdentifyDateUUID -->
       </class> <!-- pl.thatisit.plotter.DateUUIDTest -->
+      <class name="pl.thatisit.plotter.drivespace.DrivesTest">
+        <test-method signature="shouldParseMountsOutput()[pri:0, instance:pl.thatisit.plotter.drivespace.DrivesTest@659a969b]" started-at="2021-05-04T17:29:12Z" name="shouldParseMountsOutput" finished-at="2021-05-04T17:29:12Z" duration-ms="9" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- shouldParseMountsOutput -->
+      </class> <!-- pl.thatisit.plotter.drivespace.DrivesTest -->
     </test> <!-- Command line test -->
   </suite> <!-- Command line suite -->
 </testng-results>

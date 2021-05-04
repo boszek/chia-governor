@@ -1,1 +1,6 @@
+pl\thatisit\plotter\DateUUIDTest.class
+pl\thatisit\plotter\systemtask\ArgumentsTest.class
 pl\thatisit\plotter\logprocessor\ProcessLogParserTest.class
+pl\thatisit\plotter\runner\WindowsPlotProcessRunnerTest.class
+pl\thatisit\plotter\systemtask\linux\LinuxSystemTaskProviderTest.class
+pl\thatisit\plotter\drivespace\DrivesTest.class

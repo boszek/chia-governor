@@ -8,8 +8,8 @@ import pl.thatisit.plotter.logprocessor.LogLoader;
 import pl.thatisit.plotter.logprocessor.ProcessLogParser;
 import pl.thatisit.plotter.runner.LinuxPlotProcessRunner;
 import pl.thatisit.plotter.runner.WindowsPlotProcessRunner;
-import pl.thatisit.plotter.systemtask.LinuxSystemTaskProvider;
-import pl.thatisit.plotter.systemtask.WindowsSystemTaskProvider;
+import pl.thatisit.plotter.systemtask.linux.LinuxSystemTaskProvider;
+import pl.thatisit.plotter.systemtask.windows.WindowsSystemTaskProvider;
 
 public class Main {
 

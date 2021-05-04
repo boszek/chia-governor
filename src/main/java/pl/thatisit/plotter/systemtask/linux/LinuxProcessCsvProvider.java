@@ -1,4 +1,4 @@
-package pl.thatisit.plotter.systemtask;
+package pl.thatisit.plotter.systemtask.linux;
 
 import org.apache.commons.io.IOUtils;
 

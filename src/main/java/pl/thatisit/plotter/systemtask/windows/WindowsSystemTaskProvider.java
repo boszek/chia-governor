@@ -1,9 +1,12 @@
-package pl.thatisit.plotter.systemtask;
+package pl.thatisit.plotter.systemtask.windows;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import pl.thatisit.plotter.domain.K;
 import pl.thatisit.plotter.domain.PlotterProcess;
+import pl.thatisit.plotter.systemtask.Arguments;
+import pl.thatisit.plotter.systemtask.SystemTaskProvider;
+import pl.thatisit.plotter.systemtask.windows.WindowsProcessCsvProvider;
 
 import java.io.IOException;
 import java.nio.file.Path;
