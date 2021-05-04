@@ -22,13 +22,22 @@ public class Arguments {
                 i++;
             } else if (Character.isWhitespace(next)){
                 i++;
-            } else {
+            } else if(Character.isAlphabetic(next)) {
                 var sb = new StringBuilder();
-                while(i < characters.length && !Character.isWhitespace(characters[i])) {
+                while (Character.isAlphabetic(characters[i]) || Character.isDigit(characters[i]) || characters[i] == '/' || characters[i]=='-') {
                     sb.append(characters[i]);
                     i++;
                 }
                 parseToken(sb.toString(), tokens);
+            } else if(characters[i] == '-' && characters[i-1] == ' '){
+                var sb = new StringBuilder();
+                while(i < characters.length && !((characters[i] == ' ' || characters[i] == '\"') && characters[i+1] == '-')) {
+                    sb.append(characters[i]);
+                    i++;
+                }
+                parseToken(sb.toString(), tokens);
+            } else {
+                i++;
             }
         }
     }

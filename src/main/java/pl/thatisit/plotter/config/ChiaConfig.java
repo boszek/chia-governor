@@ -6,6 +6,7 @@ import java.util.List;
 
 @Data
 public class ChiaConfig {
+    String python;
     String executable;
     String memory;
     String logs;
