@@ -13,16 +13,25 @@ import pl.thatisit.plotter.systemtask.linux.LinuxProcessCsvProvider;
 import pl.thatisit.plotter.systemtask.linux.LinuxSystemTaskProvider;
 import pl.thatisit.plotter.systemtask.windows.WindowsSystemTaskProvider;
 
+import static pl.thatisit.plotter.web.Converter.toJson;
+import static spark.Spark.get;
+
 public class Main {
 
     public static void main(String[] args) {
-        Governor governor;
         var system = System.getProperty("os.name");
+        Governor governor;
         if (system.contains("Linux")) {
-            linux(ConfigurationManager.get("configuration-linux.yaml")).init();
+            governor = linux(ConfigurationManager.get("configuration-linux.yaml")).init();
         } else {
-            windows(ConfigurationManager.get("configuration-windows.yaml")).init();
+            governor = windows(ConfigurationManager.get("configuration-windows.yaml")).init();
         }
+
+        configureWebServer(governor);
+    }
+
+    private static void configureWebServer(Governor governor) {
+        get("/v1/processes", (req, res) -> toJson(governor.processes()));
     }
 
     private static Governor linux(ChiaConfig config) {

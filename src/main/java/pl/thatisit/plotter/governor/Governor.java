@@ -9,6 +9,7 @@ import pl.thatisit.plotter.logprocessor.ProcessLogParser;
 import pl.thatisit.plotter.runner.PlotProcessRunner;
 import pl.thatisit.plotter.systemtask.SystemTaskProvider;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -36,10 +37,13 @@ public class Governor {
     List<PlotterProcess> unmanagedTasks;
     List<PlotterProcess> processes;
 
-    public void init() {
-        while (true) {
-            loop();
-        }
+    public Governor init() {
+        new Thread(() -> {
+            while (true) {
+                loop();
+            }
+        }).start();
+        return this;
     }
 
     public void loop() {
@@ -47,6 +51,10 @@ public class Governor {
         printProcesses();
         planProcesses();
         sleep(30);
+    }
+
+    public List<PlotterProcess> processes() {
+        return new ArrayList<>(managedTasks);
     }
 
     private void planProcesses() {
