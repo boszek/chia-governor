@@ -3,12 +3,14 @@ package pl.thatisit.plotter.systemtask.windows;
 import org.mockito.Mock;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pl.thatisit.plotter.drivespace.Drives;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStreamReader;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static pl.thatisit.plotter.domain.K.K_32;
 
@@ -33,13 +35,16 @@ public class WindowsSystemTaskProviderTest {
 
     @Mock
     private WindowsProcessCsvProvider windowsProcessCsvProvider;
+    @Mock
+    private Drives drives;
 
     private WindowsSystemTaskProvider windowsSystemTaskProvider;
 
     @BeforeMethod
     public void init() {
         initMocks(this);
-        windowsSystemTaskProvider = new WindowsSystemTaskProvider(windowsProcessCsvProvider);
+        given(drives.getDrive(anyString())).willAnswer(answer -> answer.getArguments()[0].toString().substring(0,2));
+        windowsSystemTaskProvider = new WindowsSystemTaskProvider(windowsProcessCsvProvider, drives);
     }
 
     @Test
