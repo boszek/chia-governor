@@ -17,7 +17,7 @@ public final class ConfigurationManager {
         }
         Yaml yamlParser = new Yaml();
         config = yamlParser.loadAs(new InputStreamReader(ConfigurationManager.class.getClassLoader().getResourceAsStream(file)), Configuration.class)
-                    .getChia();
+                .getChia();
         return config;
     }
 }

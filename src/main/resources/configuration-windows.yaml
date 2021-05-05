@@ -4,14 +4,14 @@ chia:
   logs: c:/Users/boszek/.chia/logs
   temps:
     - location: "G:/plot1"
-      limit: 4
+      limit: 0
     - location: "H:/plot2"
-      limit: 4
+      limit: 0
     - location: "D:/temp"
-      limit: 1
+      limit: 0
     - location: "E:/temp"
-      limit: 1
+      limit: 0
     - location: "F:/temp"
-      limit: 1
+      limit: 0
   targets:
     - "J:/Chia Plots"

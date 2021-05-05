@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class LinuxPlotProcessRunner implements PlotProcessRunner{
+public class LinuxPlotProcessRunner implements PlotProcessRunner {
 
     private final String executable;
     private final String python;
@@ -35,7 +35,7 @@ public class LinuxPlotProcessRunner implements PlotProcessRunner{
                     " plots create -k32 -n1 \"-t%s\" \"-2%s\" \"-d%s\" -b%s -u128", temp, temp, target, memory);
             cmd = String.format("nohup sh -c '%s' > %s &", cmd, logLocation);
             System.out.println("Starting process with the command: " + cmd);
-            ProcessBuilder processBuilder = new ProcessBuilder("nohup", "sh", "-c", cmd , " > " + logLocation + " &");
+            ProcessBuilder processBuilder = new ProcessBuilder("nohup", "sh", "-c", cmd, " > " + logLocation + " &");
             processBuilder.start();
         } catch (IOException e) {
             e.printStackTrace();

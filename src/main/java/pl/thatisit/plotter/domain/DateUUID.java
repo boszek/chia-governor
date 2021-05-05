@@ -26,6 +26,6 @@ public final class DateUUID {
 
     @Override
     public String toString() {
-       return datePart + "-" + value;
+        return datePart + "-" + value;
     }
 }

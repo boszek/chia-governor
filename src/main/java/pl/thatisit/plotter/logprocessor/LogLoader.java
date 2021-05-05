@@ -1,7 +1,7 @@
 package pl.thatisit.plotter.logprocessor;
 
-import pl.thatisit.plotter.domain.PlotterProcess;
 import pl.thatisit.plotter.config.ChiaConfig;
+import pl.thatisit.plotter.domain.PlotterProcess;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -17,7 +17,7 @@ public class LogLoader {
 
     public InputStreamReader getLogStream(PlotterProcess process) {
         try {
-            return new InputStreamReader( new FileInputStream(Path.of(config.getLogs(), process.getId() + ".log").toFile()));
+            return new InputStreamReader(new FileInputStream(Path.of(config.getLogs(), process.getId() + ".log").toFile()));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
