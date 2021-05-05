@@ -1,10 +1,10 @@
 chia:
   python: /home/boszek/projects/chia-blockchain/venv/bin/python3.8
   executable: /home/boszek/projects/chia-blockchain/venv/bin/chia
-  memory: 3800
+  memory: 3400
   logs: /home/boszek/chia/logs
   temps:
-    - location: "/media/boszek/Chia Toshiba 4TB/temp"
-      limit: 1
+    - location: "/mnt/chiatemps980"
+      limit: 3
   targets:
-    - "/media/boszek/Chia Toshiba 4TB/Chia Plots"
+    - "/mnt/chiatosh4tb1"

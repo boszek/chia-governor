@@ -4,11 +4,12 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import pl.thatisit.plotter.domain.K;
 import pl.thatisit.plotter.domain.PlotterProcess;
+import pl.thatisit.plotter.drivespace.Drives;
+import pl.thatisit.plotter.drivespace.WindowsDrives;
 import pl.thatisit.plotter.systemtask.Arguments;
 import pl.thatisit.plotter.systemtask.SystemTaskProvider;
 
 import java.io.IOException;
-import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -17,13 +18,15 @@ import java.util.stream.Collectors;
 public class WindowsSystemTaskProvider implements SystemTaskProvider {
 
     private final WindowsProcessCsvProvider windowsProcessCsvProvider;
+    private final Drives drives;
 
     public WindowsSystemTaskProvider() {
-        this(new WindowsProcessCsvProvider());
+        this(new WindowsProcessCsvProvider(), new WindowsDrives());
     }
 
-    WindowsSystemTaskProvider(WindowsProcessCsvProvider windowsProcessCsvProvider) {
+    WindowsSystemTaskProvider(WindowsProcessCsvProvider windowsProcessCsvProvider, Drives drives) {
         this.windowsProcessCsvProvider = windowsProcessCsvProvider;
+        this.drives = drives;
     }
 
     @Override
@@ -70,28 +73,24 @@ public class WindowsSystemTaskProvider implements SystemTaskProvider {
         if (!command.contains("t")) {
             return null;
         }
-        var tempPath = Path.of(command.get("t"));
-        return tempPath.getFileName().toString();
+        var path = command.get("t");
+        if (path.contains("\\")) {
+            return path.substring(path.lastIndexOf("\\") + 1, path.length());
+        }
+        return path;
     }
 
     private String tempDrive(Arguments command) {
         if (!command.contains("t")) {
             return null;
         }
-        var tempPath = Path.of(command.get("t"));
-        return getDrive(tempPath);
+        return drives.getDrive(command.get("t"));
     }
 
     private String targetDrive(Arguments command) {
         if (!command.contains("d")) {
             return null;
         }
-        var tempPath = Path.of(command.get("d"));
-        return getDrive(tempPath);
+        return drives.getDrive(command.get("d"));
     }
-
-    private String getDrive(Path path) {
-        return path.getRoot().toString().replaceAll("[\\\\/]", "").toUpperCase();
-    }
-
 }
