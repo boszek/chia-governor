@@ -9,6 +9,7 @@ public class ChiaConfig {
     String python;
     String executable;
     String memory;
+    int threads;
     String logs;
     List<Temp> temps;
     List<String> targets;
