@@ -9,3 +9,4 @@ chia:
       limit: 4
   targets:
     - "J:/Chia Plots"
+    - "F:/Chia Plots"

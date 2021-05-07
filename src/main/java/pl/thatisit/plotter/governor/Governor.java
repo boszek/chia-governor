@@ -9,6 +9,7 @@ import pl.thatisit.plotter.logprocessor.ProcessLogParser;
 import pl.thatisit.plotter.runner.PlotProcessRunner;
 import pl.thatisit.plotter.systemtask.SystemTaskProvider;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -83,7 +84,7 @@ public class Governor {
         if (disk.getUsableFreeSpace() < K_32.getRequiredTempSpace()) {
             return false;
         }
-        if (otherStage1Running(temp.getLocation())) {
+        if (otherStage1Running(temp.getLocation()) && startedLessThan2hrsAgo()) {
             return false;
         }
         if (runningProcessesOn(temp.getLocation()) >= temp.getLimit()) {
@@ -92,10 +93,16 @@ public class Governor {
         return true;
     }
 
+    private boolean startedLessThan2hrsAgo() {
+        return managedTasks.stream()
+                .anyMatch(task -> task.getStarted().isAfter(LocalDateTime.now().minusHours(2)));
+    }
+
     private int runningProcessesOn(String location) {
         var drive = drives.getDrive(location);
         return (int) managedTasks.stream()
                 .filter(task -> drives.getDrive(task.getTempDrive()).equals(drive))
+                .filter(task -> task.getStatus() != PlotStatus.FINISHED)
                 .count();
     }
 

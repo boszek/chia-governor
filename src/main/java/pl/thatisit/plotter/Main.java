@@ -12,6 +12,8 @@ import pl.thatisit.plotter.runner.WindowsPlotProcessRunner;
 import pl.thatisit.plotter.systemtask.linux.LinuxProcessCsvProvider;
 import pl.thatisit.plotter.systemtask.linux.LinuxSystemTaskProvider;
 import pl.thatisit.plotter.systemtask.windows.WindowsSystemTaskProvider;
+import pl.thatisit.plotter.web.PlotsScrapper;
+import pl.thatisit.plotter.web.PlotsStatistics;
 
 import static pl.thatisit.plotter.web.Converter.toJson;
 import static spark.Spark.get;
@@ -19,19 +21,24 @@ import static spark.Spark.get;
 public class Main {
 
     public static void main(String[] args) {
-        var system = System.getProperty("os.name");
-        Governor governor;
-        if (system.contains("Linux")) {
-            governor = linux(ConfigurationManager.get("configuration-linux.yaml")).init();
-        } else {
-            governor = windows(ConfigurationManager.get("configuration-windows.yaml")).init();
-        }
+        final var system = System.getProperty("os.name");
+        final Governor governor;
+        final ChiaConfig config;
 
-        configureWebServer(governor);
+        if (system.contains("Linux")) {
+            config = ConfigurationManager.get("configuration-linux.yaml");
+            governor = linux(config).init();
+        } else {
+            config = ConfigurationManager.get("configuration-windows.yaml");
+            governor = windows(config).init();
+        }
+        PlotsStatistics plotsStatistics = new PlotsStatistics(new PlotsScrapper(config));
+        configureWebServer(governor, plotsStatistics);
     }
 
-    private static void configureWebServer(Governor governor) {
+    private static void configureWebServer(Governor governor, PlotsStatistics plotsStatistics) {
         get("/v1/processes", (req, res) -> toJson(governor.processes()));
+        get("/v1/plots", (req, res) -> toJson(plotsStatistics.get()));
     }
 
     private static Governor linux(ChiaConfig config) {
