@@ -2,6 +2,7 @@ chia:
   executable: C:/Users/boszek/AppData/Local/chia-blockchain
   memory: 5000
   threads: 4
+  keyId: 3337690719
   logs: c:/Users/boszek/.chia/logs
   temps:
     - location: "G:/plot1"

@@ -1,9 +1,11 @@
 chia:
   executable: /home/boszek/projects/chia-blockchain/venv/bin/chia
   memory: 3500
+  threads: 3
   logs: /home/boszek/chia/logs
+  keyId: 3337690719
   temps:
     - location: "/mnt/chiatemps980"
-      limit: 0
+      limit: 3
   targets:
     - "/mnt/chiatosh4tb1"

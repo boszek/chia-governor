@@ -10,6 +10,7 @@ public class ChiaConfig {
     String memory;
     int threads;
     String logs;
+    String keyId;
     List<Temp> temps;
     List<String> targets;
 }
