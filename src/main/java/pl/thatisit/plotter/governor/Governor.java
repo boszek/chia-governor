@@ -84,18 +84,13 @@ public class Governor {
         if (disk.getUsableFreeSpace() < K_32.getRequiredTempSpace()) {
             return false;
         }
-        if (otherStage1Running(temp.getLocation()) && startedLessThan2hrsAgo()) {
+        if (otherStage1Running(temp.getLocation())) {
             return false;
         }
         if (runningProcessesOn(temp.getLocation()) >= temp.getLimit()) {
             return false;
         }
         return true;
-    }
-
-    private boolean startedLessThan2hrsAgo() {
-        return managedTasks.stream()
-                .anyMatch(task -> task.getStarted().isAfter(LocalDateTime.now().minusHours(2)));
     }
 
     private int runningProcessesOn(String location) {
