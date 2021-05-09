@@ -23,9 +23,13 @@ public class PlotsScrapper {
     }
 
     private Stream<String> streamPlotFiles(String location) {
-        return FileUtils.listFiles(new File(location), new String[]{"plot"}, true)
+        try {
+            return FileUtils.listFiles(new File(location), new String[]{"plot"}, true)
                 .stream()
-                .map(file -> ((File)file).getName())
-                .distinct();
+                    .map(file -> ((File)file).getName())
+                    .distinct();
+        } catch(Throwable e) {
+            return Stream.empty();
+        }
     }
 }

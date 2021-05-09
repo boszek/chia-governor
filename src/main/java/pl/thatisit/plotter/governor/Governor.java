@@ -12,6 +12,8 @@ import pl.thatisit.plotter.systemtask.SystemTaskProvider;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -68,19 +70,22 @@ public class Governor {
 
     private void startPlotter(String temp) {
         var target = findTarget();
-        plotProcessRunner.startProcess(temp, randomDateUUID(), target);
+        if (target.isPresent()) {
+            plotProcessRunner.startProcess(temp, randomDateUUID(), target.get());
+        } else {
+            System.out.println("No targets with free space available!");
+        }
     }
 
-    private String findTarget() {
+    private Optional<String> findTarget() {
         return config.getTargets()
                 .stream()
-                .filter(target -> spaceGovernor.diskInfo(target).getUsableFreeSpace() > K_32.getRequiredTargetSpace())
-                .findFirst()
-                .orElseThrow(() -> new IllegalStateException("No space on target devices!"));
+                .filter(target -> spaceGovernor.diskInfo(target, true).getUsableFreeSpace() > K_32.getRequiredTargetSpace())
+                .findFirst();
     }
 
     private boolean canStartPlotter(Temp temp) {
-        var disk = spaceGovernor.diskInfo(temp.getLocation());
+        var disk = spaceGovernor.diskInfo(temp.getLocation(), true);
         if (disk.getUsableFreeSpace() < K_32.getRequiredTempSpace()) {
             return false;
         }
@@ -110,18 +115,20 @@ public class Governor {
 
     private void printProcesses() {
         System.out.printf("Processes: %d, managed: %d, unmanaged %d%n", processes.size(), managedTasks.size(), unmanagedTasks.size());
-        managedTasks.forEach(process -> System.out.printf("Process %s, started %s, temp %s, status %s, progress: %s\n",
-                process.getId(), process.getStarted(), process.getTempDrive(), process.getStatus(), process.getProgress()));
-        config.getTemps()
-                .forEach(temp -> {
-                    var disk = spaceGovernor.diskInfo(temp.getLocation());
-                    var msg = String.format("Temp %s: total=%s, allocated=%s, free=%s, usablefree=%s", temp,
-                            toGB(disk.getTotalSize()),
-                            toGB(disk.getAllocated()),
-                            toGB(disk.getFreeSpace()),
-                            toGB(disk.getUsableFreeSpace()));
-                    System.out.println(msg);
-                });
+        managedTasks.forEach(process -> System.out.printf("Process %s, started %s, temp %s, target: %s status %s, progress: %s\n",
+                process.getId(), process.getStarted(), process.getTempDrive(), process.getTargetDrive(), process.getStatus(), process.getProgress()));
+        config.getTemps().stream().map(Temp::getLocation).forEach(this::printDiskInfo);
+        config.getTargets().forEach(this::printDiskInfo);
+    }
+
+    private void printDiskInfo(String location) {
+        var disk = spaceGovernor.diskInfo(location, false);
+        var msg = String.format("%s: total=%s, allocated=%s, free=%s, usablefree=%s", location,
+                toGB(disk.getTotalSize()),
+                toGB(disk.getAllocated()),
+                toGB(disk.getFreeSpace()),
+                toGB(disk.getUsableFreeSpace()));
+        System.out.println(msg);
     }
 
     private String toGB(long value) {

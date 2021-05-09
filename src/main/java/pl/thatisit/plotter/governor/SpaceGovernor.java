@@ -15,18 +15,24 @@ class SpaceGovernor {
         this.drives = drives;
     }
 
-    public DiskInfo diskInfo(String temp) {
+    public DiskInfo diskInfo(String temp, boolean includeTemps) {
         var drive = drives.getDrive(temp);
         var driveFile = new File(drive);
         var freeSpace = driveFile.getFreeSpace();
         var tempFile = new File(temp);
-        var usedByTemp = tempFile.exists() ? FileUtils.sizeOfDirectory(tempFile) : 0;
+        var usedByTemp = includeTemps ? (tempFile.exists() ? FileUtils.sizeOfDirectory(tempFile) : 0) : 0;
         var allocated = governor.processes
                 .stream()
                 .filter(plotterProcess -> drives.getDrive(plotterProcess.getTempDrive()).equals(drive))
                 .mapToLong(plotterProcess -> plotterProcess.getK().getRequiredTempSpace())
                 .sum();
-        var usableFree = freeSpace + usedByTemp - allocated;
+
+        var allocatedTargets = governor.processes
+                .stream()
+                .filter(plotterProcess -> drives.getDrive(plotterProcess.getTargetDrive()).equals(drive))
+                .mapToLong(plotterProcess -> plotterProcess.getK().getRequiredTargetSpace())
+                .sum();
+        var usableFree = freeSpace + usedByTemp - allocated - allocatedTargets;
 
         return DiskInfo.builder()
                 .freeSpace(freeSpace)

@@ -1,19 +1,18 @@
 chia:
   executable: C:/Users/boszek/AppData/Local/chia-blockchain
-  memory: 5000
-  threads: 4
+  memory: 4000
+  threads: 3
   keyId: 3337690719
   logs: c:/Users/boszek/.chia/logs
   temps:
-    - location: "G:/plot1"
-      limit: 4
-    - location: "H:/plot1"
-      limit: 4
-    - location: "F:/temp"
-      limit: 1
+    - location: "E:/temp"
+      limit: 3
+    - location: "G:/temp"
+      limit: 3
+    - location: "H:/temp"
+      limit: 3
   targets:
     - "J:/Chia Plots"
     - "F:/Chia Plots"
     - "Y:"
-    - "X:"
-    - "W:"
+    - "Z:/Chia Plots"
