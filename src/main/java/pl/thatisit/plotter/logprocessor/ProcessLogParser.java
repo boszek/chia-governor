@@ -43,7 +43,6 @@ public class ProcessLogParser {
     }
 
     public static PlotterProcess evaluateStatus(PlotterProcess process) {
-        registry().gauge("plotter_process_stage", List.of(Tag.of("id", process.getId())), 1);
         return new ProcessLogParser(process).processLogs();
     }
 
@@ -74,7 +73,6 @@ public class ProcessLogParser {
             registry().gauge("plotter_process_stage", List.of(Tag.of("id", process.getId())), stage);
             registry().gauge("plotter_process_table", List.of(Tag.of("id", process.getId()), Tag.of("stage", "" + stage)), table);
             registry().gauge("plotter_process_bucket", List.of(Tag.of("id", process.getId()), Tag.of("stage", "" + stage)), bucket);
-
             var progress = toProgress(stage);
             return process.toBuilder()
                     .status(progress.getStatus())
@@ -161,7 +159,12 @@ public class ProcessLogParser {
                         .stage3(stage3)
                         .stage4(StageProgress.builder().table(table).bucket(bucket).build()).build();
             case 5:
-                return PlotProgress.builder().status(PlotStatus.FINISHED).build();
+                return PlotProgress.builder()
+                        .stage1(stage1)
+                        .stage2(stage2)
+                        .stage3(stage3)
+                        .stage4(stage4)
+                        .status(PlotStatus.FINISHED).build();
             default:
                 return PlotProgress.builder().status(PlotStatus.STAGE1)
                         .stage1(StageProgress.builder().table(table).bucket(bucket).build()).build();
