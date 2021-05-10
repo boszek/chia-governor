@@ -1,4 +1,4 @@
-package pl.thatisit.plotter.web;
+package pl.thatisit.plotter.web.model;
 
 import lombok.Value;
 

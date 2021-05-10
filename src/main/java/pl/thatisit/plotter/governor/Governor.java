@@ -6,19 +6,21 @@ import pl.thatisit.plotter.domain.PlotterProcess;
 import pl.thatisit.plotter.drivespace.Drives;
 import pl.thatisit.plotter.logprocessor.PlotStatus;
 import pl.thatisit.plotter.logprocessor.ProcessLogParser;
+import pl.thatisit.plotter.metrics.Metrics;
 import pl.thatisit.plotter.runner.PlotProcessRunner;
 import pl.thatisit.plotter.systemtask.SystemTaskProvider;
+import pl.thatisit.plotter.web.PlotsScrapper;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static pl.thatisit.plotter.domain.DateUUID.randomDateUUID;
 import static pl.thatisit.plotter.domain.K.K_32;
+import static pl.thatisit.plotter.metrics.Metrics.registry;
 
 public class Governor {
 
@@ -26,6 +28,7 @@ public class Governor {
     private final ChiaConfig config;
     private final SpaceGovernor spaceGovernor;
     private final PlotProcessRunner plotProcessRunner;
+    private final PlotsScrapper plotsScrapper;
     private final Drives drives;
 
     public Governor(SystemTaskProvider systemTasks, ChiaConfig config, PlotProcessRunner plotProcessRunner, Drives drives) {
@@ -34,6 +37,7 @@ public class Governor {
         this.plotProcessRunner = plotProcessRunner;
         this.drives = drives;
         spaceGovernor = new SpaceGovernor(this, drives);
+        plotsScrapper = new PlotsScrapper(config);
     }
 
     List<PlotterProcess> managedTasks;
@@ -53,7 +57,12 @@ public class Governor {
         queryProcesses();
         printProcesses();
         planProcesses();
+        countPlots();
         sleep(30);
+    }
+
+    private void countPlots() {
+        registry().gauge("plotter_plots", plotsScrapper.findPlotFiles().size());
     }
 
     public List<PlotterProcess> processes() {
@@ -89,13 +98,18 @@ public class Governor {
         if (disk.getUsableFreeSpace() < K_32.getRequiredTempSpace()) {
             return false;
         }
-        if (otherStage1Running(temp.getLocation())) {
+        if (otherStage1Running(temp.getLocation()) && startedLessThan2hrsAgo()) {
             return false;
         }
         if (runningProcessesOn(temp.getLocation()) >= temp.getLimit()) {
             return false;
         }
         return true;
+    }
+
+    private boolean startedLessThan2hrsAgo() {
+        return managedTasks.stream()
+                .anyMatch(task -> task.getStarted().isAfter(LocalDateTime.now().minusHours(2)));
     }
 
     private int runningProcessesOn(String location) {
@@ -150,6 +164,8 @@ public class Governor {
                 .map(this::processStatus)
                 .collect(Collectors.toList());
         unmanagedTasks = unmanaged(processes).collect(Collectors.toList());
+        registry().gauge("plotter_managedTasks", managedTasks.size());
+        registry().gauge("plotter_unmanagedTasks", unmanagedTasks.size());
     }
 
     private PlotterProcess processStatus(PlotterProcess source) {

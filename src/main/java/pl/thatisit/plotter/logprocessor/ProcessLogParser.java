@@ -1,12 +1,16 @@
 package pl.thatisit.plotter.logprocessor;
 
+import io.micrometer.core.instrument.Tag;
 import pl.thatisit.plotter.domain.PlotterProcess;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static pl.thatisit.plotter.metrics.Metrics.registry;
 
 public class ProcessLogParser {
 
@@ -15,29 +19,35 @@ public class ProcessLogParser {
     private static final Pattern STAGE_1_BUCKET = Pattern.compile("Bucket (\\d+) uniform sort.*");
     private static final Pattern STAGE_2_TABLE = Pattern.compile("Backpropagating on table (\\d+).*");
     private static final Pattern STAGE_2_FINISHED = Pattern.compile("Time for phase 2 = (\\d+).\\d+ seconds.*");
-    private static final Pattern STAGE_3_TABLE = Pattern.compile("Compressing tables 1 and (\\d+)");
+    private static final Pattern STAGE_3_TABLE = Pattern.compile("Compressing tables \\d and (\\d+)");
     private static final Pattern STAGE_3_BUCKET = Pattern.compile("Bucket (\\d+).*");
     private static final Pattern STAGE_3_FINISHED = Pattern.compile("Time for phase 3 = (\\d+).\\d+ seconds.*");
     private static final Pattern STAGE_4_BUCKET = Pattern.compile("Bucket (\\d+).*");
     private static final Pattern STAGE_4_FINISHED = Pattern.compile("Time for phase 4 = (\\d+).\\d+ seconds.*");
-
     private static LogLoader logLoader;
+    private final PlotterProcess process;
+    int stage = 1;
+    Integer table;
+    Integer bucket;
+    StageProgress stage1;
+    StageProgress stage2;
+    StageProgress stage3;
+    StageProgress stage4;
+
+    private ProcessLogParser(PlotterProcess process) {
+        this.process = process;
+    }
 
     public static void init(LogLoader loader) {
         logLoader = loader;
     }
 
-    private ProcessLogParser() {
-    }
-
     public static PlotterProcess evaluateStatus(PlotterProcess process) {
-        return new ProcessLogParser().processLogs(process);
+        registry().gauge("plotter_process_stage", List.of(Tag.of("id", process.getId())), 1);
+        return new ProcessLogParser(process).processLogs();
     }
 
-    private ProgressTracker progressTracker = new ProgressTracker();
-    int stage = 1;
-
-    private PlotterProcess processLogs(PlotterProcess process) {
+    private PlotterProcess processLogs() {
         try (var logStream = new BufferedReader(logLoader.getLogStream(process))) {
             String line;
 
@@ -61,9 +71,14 @@ public class ProcessLogParser {
                     matches(STAGE_4_FINISHED, line).ifPresent(this::setStage4Finished);
                 }
             }
+            registry().gauge("plotter_process_stage", List.of(Tag.of("id", process.getId())), stage);
+            registry().gauge("plotter_process_table", List.of(Tag.of("id", process.getId()), Tag.of("stage", "" + stage)), table);
+            registry().gauge("plotter_process_bucket", List.of(Tag.of("id", process.getId()), Tag.of("stage", "" + stage)), bucket);
+
+            var progress = toProgress(stage);
             return process.toBuilder()
-                    .status(progressTracker.toStatus())
-                    .progress(progressTracker.toProgress())
+                    .status(progress.getStatus())
+                    .progress(progress)
                     .build();
         } catch (IOException e) {
             e.printStackTrace();
@@ -72,52 +87,52 @@ public class ProcessLogParser {
         return process;
     }
 
-    private void setStage4Bucket(Matcher matcher) {
-        progressTracker.setStage4bucket(Integer.parseInt(matcher.group(1)));
+    private void setStage1Table(Matcher m) {
+        table = Integer.parseInt(m.group(1));
     }
 
-    private void setStage3Bucket(Matcher matcher) {
-        progressTracker.setStage3bucket(Integer.parseInt(matcher.group(1)));
-    }
-
-    private void setStage3Table(Matcher matcher) {
-        progressTracker.setStage3table(Integer.parseInt(matcher.group(1)));
-    }
-
-    private void setStage2Finished(Matcher matcher) {
-        var seconds = Integer.parseInt(matcher.group(1));
-        progressTracker.setStage2finished(formatSeconds(seconds));
-        stage = 3;
-    }
-
-    private void setStage3Finished(Matcher matcher) {
-        var seconds = Integer.parseInt(matcher.group(1));
-        progressTracker.setStage3finished(formatSeconds(seconds));
-        stage = 4;
-    }
-
-    private void setStage4Finished(Matcher matcher) {
-        var seconds = Integer.parseInt(matcher.group(1));
-        progressTracker.setStage4finished(formatSeconds(seconds));
-        stage = 5;
-    }
-
-    private void setStage2Table(Matcher matcher) {
-        progressTracker.setStage2table(8 - Integer.parseInt(matcher.group(1)));
+    private void setStage1Bucket(Matcher m) {
+        bucket = Integer.parseInt(m.group(1));
     }
 
     private void setStage1Finished(Matcher matcher) {
         var seconds = Integer.parseInt(matcher.group(1));
-        progressTracker.setStage1finished(formatSeconds(seconds));
-        stage = 2;
+        stage1 = StageProgress.builder().finished(formatSeconds(seconds)).build();
+        setStage(2);
     }
 
-    private void setStage1Table(Matcher m) {
-        progressTracker.setStage1table(Integer.parseInt(m.group(1)));
+    private void setStage2Table(Matcher matcher) {
+        table = 8 - Integer.parseInt(matcher.group(1));
     }
 
-    private void setStage1Bucket(Matcher m) {
-        progressTracker.setStage1bucket(Integer.parseInt(m.group(1)));
+    private void setStage2Finished(Matcher matcher) {
+        var seconds = Integer.parseInt(matcher.group(1));
+        stage2 = StageProgress.builder().finished(formatSeconds(seconds)).build();
+        setStage(3);
+    }
+
+    private void setStage3Bucket(Matcher matcher) {
+        bucket = Integer.parseInt(matcher.group(1));
+    }
+
+    private void setStage3Table(Matcher matcher) {
+        table = Integer.parseInt(matcher.group(1));
+    }
+
+    private void setStage3Finished(Matcher matcher) {
+        var seconds = Integer.parseInt(matcher.group(1));
+        stage3 = StageProgress.builder().finished(formatSeconds(seconds)).build();
+        setStage(4);
+    }
+
+    private void setStage4Bucket(Matcher matcher) {
+        bucket = Integer.parseInt(matcher.group(1));
+    }
+
+    private void setStage4Finished(Matcher matcher) {
+        var seconds = Integer.parseInt(matcher.group(1));
+        stage4 = StageProgress.builder().finished(formatSeconds(seconds)).build();
+        setStage(5);
     }
 
     private Optional<Matcher> matches(Pattern pattern, String value) {
@@ -128,19 +143,35 @@ public class ProcessLogParser {
         return Optional.empty();
     }
 
-    private PlotStatus toStatus(Integer phaseFinished) {
+    private PlotProgress toProgress(Integer phaseFinished) {
         switch (phaseFinished) {
-            case 1:
-                return PlotStatus.STAGE2;
             case 2:
-                return PlotStatus.STAGE3;
+                return PlotProgress.builder().status(PlotStatus.STAGE2)
+                        .stage1(stage1)
+                        .stage2(StageProgress.builder().table(table).bucket(bucket).build()).build();
             case 3:
-                return PlotStatus.STAGE4;
+                return PlotProgress.builder().status(PlotStatus.STAGE3)
+                        .stage1(stage1)
+                        .stage2(stage2)
+                        .stage3(StageProgress.builder().table(table).bucket(bucket).build()).build();
             case 4:
-                return PlotStatus.FINISHED;
+                return PlotProgress.builder().status(PlotStatus.STAGE4)
+                        .stage1(stage1)
+                        .stage2(stage2)
+                        .stage3(stage3)
+                        .stage4(StageProgress.builder().table(table).bucket(bucket).build()).build();
+            case 5:
+                return PlotProgress.builder().status(PlotStatus.FINISHED).build();
             default:
-                return PlotStatus.STAGE1;
+                return PlotProgress.builder().status(PlotStatus.STAGE1)
+                        .stage1(StageProgress.builder().table(table).bucket(bucket).build()).build();
         }
+    }
+
+    private void setStage(int i) {
+        stage = i;
+        bucket = 0;
+        table = 0;
     }
 
     private String formatSeconds(int totalSeconds) {

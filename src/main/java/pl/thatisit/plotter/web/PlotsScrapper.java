@@ -4,11 +4,14 @@ import org.apache.commons.io.FileUtils;
 import pl.thatisit.plotter.config.ChiaConfig;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class PlotsScrapper {
+    private final Pattern pattern = Pattern.compile("^plot-(k\\d+)-(\\d{4}-\\d{2}-\\d{2})-\\d{2}-\\d{2}-[a-f0-9]{64}\\.plot$");
     private final ChiaConfig config;
 
     public PlotsScrapper(ChiaConfig config) {
@@ -24,11 +27,13 @@ public class PlotsScrapper {
 
     private Stream<String> streamPlotFiles(String location) {
         try {
-            return FileUtils.listFiles(new File(location), new String[]{"plot"}, true)
-                .stream()
-                    .map(file -> ((File)file).getName())
+            Collection<File> files = FileUtils.listFiles(new File(location), new String[]{"plot"}, true);
+            return files
+                    .stream()
+                    .map(File::getName)
+                    .filter(name -> pattern.matcher(name).find())
                     .distinct();
-        } catch(Throwable e) {
+        } catch (Throwable e) {
             return Stream.empty();
         }
     }

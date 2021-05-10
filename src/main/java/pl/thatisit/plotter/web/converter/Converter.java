@@ -1,4 +1,4 @@
-package pl.thatisit.plotter.web;
+package pl.thatisit.plotter.web.converter;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

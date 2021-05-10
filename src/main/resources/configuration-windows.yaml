@@ -11,8 +11,9 @@ chia:
       limit: 3
     - location: "H:/temp"
       limit: 3
+    - location: "F:/temp"
+      limit: 1
   targets:
     - "J:/Chia Plots"
     - "F:/Chia Plots"
-    - "Y:"
     - "Z:/Chia Plots"
