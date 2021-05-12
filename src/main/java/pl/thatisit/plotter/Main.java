@@ -6,7 +6,7 @@ import pl.thatisit.plotter.drivespace.LinuxDrives;
 import pl.thatisit.plotter.drivespace.WindowsDrives;
 import pl.thatisit.plotter.governor.Governor;
 import pl.thatisit.plotter.logprocessor.LogLoader;
-import pl.thatisit.plotter.logprocessor.ProcessLogParser;
+import pl.thatisit.plotter.logprocessor.LogProcessorManager;
 import pl.thatisit.plotter.metrics.Metrics;
 import pl.thatisit.plotter.runner.LinuxPlotProcessRunner;
 import pl.thatisit.plotter.runner.WindowsPlotProcessRunner;
@@ -26,10 +26,12 @@ public class Main {
 
         if (system.contains("Linux")) {
             config = ConfigurationManager.get("configuration-linux.yaml");
-            governor = linux(config).init();
+            var logManager = new LogProcessorManager(new LogLoader(config));
+            governor = linux(config, logManager).init();
         } else {
             config = ConfigurationManager.get("configuration-windows.yaml");
-            governor = windows(config).init();
+            var logManager = new LogProcessorManager(new LogLoader(config));
+            governor = windows(config, logManager).init();
         }
         configureWebServer(governor);
     }
@@ -39,19 +41,17 @@ public class Main {
         get("/prometheus", (req, res) -> Metrics.registry().scrape());
     }
 
-    private static Governor linux(ChiaConfig config) {
+    private static Governor linux(ChiaConfig config, LogProcessorManager logManager) {
         var drives = new LinuxDrives();
         var systemTaskProvider = new LinuxSystemTaskProvider(new LinuxProcessCsvProvider(), drives);
-        ProcessLogParser.init(new LogLoader(config));
         var plotProcessRunner = new LinuxPlotProcessRunner(config);
-        return new Governor(systemTaskProvider, config, plotProcessRunner, drives);
+        return new Governor(systemTaskProvider, config, plotProcessRunner, drives, logManager);
     }
 
-    private static Governor windows(ChiaConfig config) {
+    private static Governor windows(ChiaConfig config, LogProcessorManager logManager) {
         var systemTaskProvider = new WindowsSystemTaskProvider();
         var drives = new WindowsDrives();
-        ProcessLogParser.init(new LogLoader(config));
         var plotProcessRunner = new WindowsPlotProcessRunner(config, drives);
-        return new Governor(systemTaskProvider, config, plotProcessRunner, drives);
+        return new Governor(systemTaskProvider, config, plotProcessRunner, drives, logManager);
     }
 }

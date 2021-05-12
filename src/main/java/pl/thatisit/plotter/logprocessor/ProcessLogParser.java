@@ -1,12 +1,13 @@
 package pl.thatisit.plotter.logprocessor;
 
 import io.micrometer.core.instrument.Tag;
+import lombok.Getter;
 import pl.thatisit.plotter.domain.PlotterProcess;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,65 +25,60 @@ public class ProcessLogParser {
     private static final Pattern STAGE_3_FINISHED = Pattern.compile("Time for phase 3 = (\\d+).\\d+ seconds.*");
     private static final Pattern STAGE_4_BUCKET = Pattern.compile("Bucket (\\d+).*");
     private static final Pattern STAGE_4_FINISHED = Pattern.compile("Time for phase 4 = (\\d+).\\d+ seconds.*");
-    private static LogLoader logLoader;
     private final PlotterProcess process;
-    int stage = 1;
-    Integer table;
-    Integer bucket;
-    StageProgress stage1;
-    StageProgress stage2;
-    StageProgress stage3;
-    StageProgress stage4;
 
-    private ProcessLogParser(PlotterProcess process) {
+    @Getter
+    private Integer stage = 1;
+    @Getter
+    private Integer table = 0;
+    @Getter
+    private Integer bucket = 0;
+
+    private StageProgress stage1;
+    private StageProgress stage2;
+    private StageProgress stage3;
+    private StageProgress stage4;
+
+    ProcessLogParser(PlotterProcess process) {
         this.process = process;
+        registry().gauge("plotter_process_stage", List.of(Tag.of("id", process.getId())), this, ProcessLogParser::getStage);
+        registry().gauge("plotter_process_table", List.of(Tag.of("id", process.getId())), this, ProcessLogParser::getTable);
+        registry().gauge("plotter_process_bucket", List.of(Tag.of("id", process.getId())), this, ProcessLogParser::getBucket);
     }
 
-    public static void init(LogLoader loader) {
-        logLoader = loader;
+    public void close() {
+        stage = 6;
+        bucket = 0;
+        table = 0;
     }
 
-    public static PlotterProcess evaluateStatus(PlotterProcess process) {
-        return new ProcessLogParser(process).processLogs();
-    }
-
-    private PlotterProcess processLogs() {
-        try (var logStream = new BufferedReader(logLoader.getLogStream(process))) {
-            String line;
-
-            while ((line = logStream.readLine()) != null) {
-                if (stage == 1) {
-                    matches(STAGE_1_BUCKET, line).ifPresent(this::setStage1Bucket);
-                    matches(STAGE_1_TABLE, line).ifPresent(this::setStage1Table);
-                    matches(STAGE_1_FINISHED, line).ifPresent(this::setStage1Finished);
-                }
-                if (stage == 2) {
-                    matches(STAGE_2_TABLE, line).ifPresent(this::setStage2Table);
-                    matches(STAGE_2_FINISHED, line).ifPresent(this::setStage2Finished);
-                }
-                if (stage == 3) {
-                    matches(STAGE_3_TABLE, line).ifPresent(this::setStage3Table);
-                    matches(STAGE_3_BUCKET, line).ifPresent(this::setStage3Bucket);
-                    matches(STAGE_3_FINISHED, line).ifPresent(this::setStage3Finished);
-                }
-                if (stage == 4) {
-                    matches(STAGE_4_BUCKET, line).ifPresent(this::setStage4Bucket);
-                    matches(STAGE_4_FINISHED, line).ifPresent(this::setStage4Finished);
-                }
-            }
-            registry().gauge("plotter_process_stage", List.of(Tag.of("id", process.getId())), stage);
-            registry().gauge("plotter_process_table", List.of(Tag.of("id", process.getId()), Tag.of("stage", "" + stage)), table);
-            registry().gauge("plotter_process_bucket", List.of(Tag.of("id", process.getId()), Tag.of("stage", "" + stage)), bucket);
-            var progress = toProgress(stage);
-            return process.toBuilder()
-                    .status(progress.getStatus())
-                    .progress(progress)
-                    .build();
-        } catch (IOException e) {
-            e.printStackTrace();
+    void processLine(String line) {
+        if (stage == 1) {
+            matches(STAGE_1_BUCKET, line).ifPresent(this::setStage1Bucket);
+            matches(STAGE_1_TABLE, line).ifPresent(this::setStage1Table);
+            matches(STAGE_1_FINISHED, line).ifPresent(this::setStage1Finished);
         }
+        if (stage == 2) {
+            matches(STAGE_2_TABLE, line).ifPresent(this::setStage2Table);
+            matches(STAGE_2_FINISHED, line).ifPresent(this::setStage2Finished);
+        }
+        if (stage == 3) {
+            matches(STAGE_3_TABLE, line).ifPresent(this::setStage3Table);
+            matches(STAGE_3_BUCKET, line).ifPresent(this::setStage3Bucket);
+            matches(STAGE_3_FINISHED, line).ifPresent(this::setStage3Finished);
+        }
+        if (stage == 4) {
+            matches(STAGE_4_BUCKET, line).ifPresent(this::setStage4Bucket);
+            matches(STAGE_4_FINISHED, line).ifPresent(this::setStage4Finished);
+        }
+    }
 
-        return process;
+    public PlotterProcess processLogs() {
+        var progress = toProgress(stage);
+        return process.toBuilder()
+                .status(progress.getStatus())
+                .progress(progress)
+                .build();
     }
 
     private void setStage1Table(Matcher m) {
