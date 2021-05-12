@@ -11,7 +11,7 @@ public class LogTailer {
     private final Consumer<String> logConsumer;
 
     public LogTailer(File file, Consumer<String> logConsumer) {
-        tailer = Tailer.create(file, new LogTailerListener(), 0);
+        tailer = Tailer.create(file, new LogTailerListener(), 1000);
         this.logConsumer = logConsumer;
     }
 
